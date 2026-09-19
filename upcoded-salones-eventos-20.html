@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upcoded · 20 salones de eventos — sin web</title>
+<style>
+  :root{--bg:#0f1115;--card:#181b22;--card2:#1f232c;--line:#2a2f3a;--tx:#e8eaed;--mut:#9aa3b2;--acc:#4f8cff;--acc2:#3ad29f;--wa:#25d366;--hot:#ff6b6b;--ig:#e1306c;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;padding:32px 18px 80px}
+  .wrap{max-width:860px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.3px}
+  .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  h1{font-size:26px;margin:14px 0 6px}
+  .sub{color:var(--mut);font-size:14px;margin:0}
+  .tip{font-size:12.5px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc2);border-radius:8px;padding:11px 14px;margin-top:16px}
+  .sec-h{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;margin:32px 0 16px}
+  .sec-h h2{font-size:15px;margin:0}
+  .sec-h small{color:var(--mut);font-size:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:13px}
+  .card.hot{border-color:rgba(255,107,107,.4)}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .name{font-weight:700;font-size:15px}
+  .zone{color:var(--mut);font-size:12px;margin-top:2px}
+  .badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .b-hot{background:rgba(255,107,107,.15);color:#ff9d9d}
+  .b-noweb{background:rgba(79,140,255,.13);color:#9dc0ff}
+  .chan{font-size:11.5px;color:var(--mut);margin:9px 0 10px;display:flex;gap:12px;flex-wrap:wrap}
+  .chan b{color:var(--tx)}
+  .ig{color:var(--ig)} .waN{color:var(--wa)}
+  .msg{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px 13px;font-size:13.5px;white-space:pre-wrap}
+  .actions{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+  button{font:inherit;font-size:12px;font-weight:600;border-radius:8px;padding:7px 12px;border:1px solid var(--line);background:var(--card2);color:var(--tx);cursor:pointer;transition:.15s}
+  button:hover{border-color:var(--acc)}
+  .copied{color:var(--acc2);border-color:var(--acc2)}
+  footer{margin-top:38px;color:var(--mut);font-size:12px;text-align:center;border-top:1px solid var(--line);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="dot"></span> UPCODED</div>
+  <h1>20 salones de eventos — sin web</h1>
+  <p class="sub">CABA + zona norte + Pilar/Escobar · verificados uno por uno · canal: Instagram DM (o WhatsApp donde figura)</p>
+  <div class="tip">💡 Todos chequeados: no tienen web propia real (o la tienen "en construcción" = lead caliente 🔥). Antes de mandar, entrá 10 segundos a su Instagram y confirmá que en la bio no haya un link a una web — es el único punto que el chequeo automático no ve del todo. Seguí + dale like a un par de posts antes de escribir, así no caés tan al fondo de "solicitudes".</div>
+
+  <div class="sec-h"><h2>🔥 Leads calientes — ya quieren web ("en construcción")</h2><small>empezá por acá</small></div>
+
+  <div class="card hot">
+    <div class="top"><div><div class="name">Esencia Eventos</div><div class="zone">Martínez · social/infantil/teens/empresas · desde 2002</div></div><div class="badge b-hot">🔥 en construcción</div></div>
+    <div class="chan"><span class="ig">IG @esenciaeventoss (43K)</span><span class="waN">WA 11 6458-9500</span></div>
+    <div class="msg" id="m1">Hola! Soy Juan, de Upcoded, hacemos webs para negocios. Los sigo por acá — con 43 mil seguidores tienen una marca bárbara. Justo entré a esenciaeventos.com.ar y vi el cartel de "sitio en construcción". Si quedó frenado o están buscando quién lo termine, es exactamente lo nuestro: les dejamos la web lista y andando en un par de semanas, con las propuestas del salón y la reserva online que mencionan. ¿Te interesa que te cuente cómo lo haríamos?</div>
+    <div class="actions"><button onclick="cp('m1',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card hot">
+    <div class="top"><div><div class="name">Cirilo Fiestas</div><div class="zone">Caballito, CABA · infantil/adultos</div></div><div class="badge b-hot">🔥 en construcción</div></div>
+    <div class="chan"><span class="waN">WA 11 6858-0177</span><span>cirilofiestas.com.ar (en construcción)</span></div>
+    <div class="msg" id="m2">Hola! Soy Juan, de Upcoded, hacemos webs. Entré a cirilofiestas.com.ar y vi que está "en construcción". Si el proyecto quedó frenado o buscan quién lo termine, es justo lo nuestro: se los dejamos andando en un par de semanas, con fotos del salón y toda la info para que los encuentren en Google. ¿Te interesa que te cuente cómo lo encararíamos?</div>
+    <div class="actions"><button onclick="cp('m2',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="sec-h"><h2>Zona Norte (PBA)</h2><small>Martínez · San Isidro · Vicente López</small></div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">La Comarca de los Duendes</div><div class="zone">Martínez · infantil</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @lacomarcadld</span><span class="waN">WA 11 6943-6237</span></div>
+    <div class="msg" id="m3">Hola, ¿cómo andan? Soy Juan, de Upcoded (hacemos webs para negocios). Los encontré por acá y me copó el lugar. Vi que no tienen web propia — un montón de papás buscan directo en Google "salón infantil en Martínez" y ahí no aparecen, quedan solo en Instagram. Se soluciona fácil. ¿Te interesa que te muestre qué se puede hacer?</div>
+    <div class="actions"><button onclick="cp('m3',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Casa Catedral</div><div class="zone">San Isidro · eventos sociales</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @casacatedral</span></div>
+    <div class="msg" id="m4">Hola! Soy Juan, de Upcoded, hacemos webs. Los encontré por Instagram, el espacio se ve muy bueno. Me llamó la atención que no tengan web propia — quien organiza un casamiento o un evento suele buscar y comparar en Google, y ahí no aparecen. Una web con galería y disponibilidad les sumaría consultas. ¿Te interesa que te cuente cómo sería?</div>
+    <div class="actions"><button onclick="cp('m4',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Lancelot Salón de Fiestas</div><div class="zone">San Isidro · infantil/adultos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span>Facebook: Lancelot Salon Fiestas</span></div>
+    <div class="msg" id="m5">Hola! Soy Juan, de Upcoded, hacemos webs. Los vi por las redes — el salón se ve genial. Me fijé si tenían página web y no encontré ninguna: hoy los ubica solo quien ya los sigue, y se pierden a la gente que busca "salón de fiestas en San Isidro" en Google. Una web simple con fotos y disponibilidad les abriría ese canal. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m5',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Lupe Eventos</div><div class="zone">Florida, Vicente López · infantil</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @lupe.tuevento</span><span class="waN">WA 11 5652-7896</span></div>
+    <div class="msg" id="m6">Hola! Soy Juan, de Upcoded, hacemos webs. Los vi por Instagram — el salón se ve bárbaro. Me fijé si tenían web y no encontré ninguna: hoy los encuentra solo quien ya los sigue, y se pierden los papás que buscan "salón de fiestas infantiles en Vicente López" en Google. Con una web simple con fotos y disponibilidad captarían esas consultas. ¿Te interesa que te cuente cómo sería?</div>
+    <div class="actions"><button onclick="cp('m6',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="sec-h"><h2>Pilar · Del Viso · Escobar</h2><small>zona de mucho volumen y ticket</small></div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Pumbiss</div><div class="zone">Pilar · infantil/adultos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @pumbisspumbiss</span><span class="waN">WA 11 5339-0052</span></div>
+    <div class="msg" id="m7">Hola! Soy Juan, de Upcoded, hacemos webs. Los vi por Instagram y el salón se ve genial. Me fijé si tenían página web y no encontré una propia: hoy los ubica solo quien ya los sigue, y se pierden los que buscan "salón de fiestas en Pilar" en Google. Una web simple con fotos y disponibilidad les abriría ese canal. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m7',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Glow Eventos</div><div class="zone">Del Viso · infantil/multieventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @glow_eventos_multiespacio</span><span class="waN">WA 11 5714-4402</span></div>
+    <div class="msg" id="m8">Hola, ¿cómo andan? Soy Juan, de Upcoded (hacemos webs para negocios). Los encontré por acá y me copó el multiespacio. Vi que no tienen web propia — mucha gente busca directo en Google "salón de eventos en Del Viso / Pilar" y ahí no aparecen, quedan solo en Instagram. Se soluciona fácil. ¿Te interesa que te muestre qué se puede hacer?</div>
+    <div class="actions"><button onclick="cp('m8',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Meet Eventos</div><div class="zone">Pilar · salón de eventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @meeteventos_pilar</span></div>
+    <div class="msg" id="m9">Hola! Soy Juan, de Upcoded, hacemos webs. Vengo siguiéndolos por Instagram y tienen un salón bárbaro. Lo único: no tienen una web donde la gente vea todo y consulte disponibilidad fuera de las redes, ni aparecen en Google cuando buscan salones en Pilar. ¿Te interesa que te cuente cómo lo armaríamos?</div>
+    <div class="actions"><button onclick="cp('m9',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Hangar Eventos</div><div class="zone">Pilar · salón de fiestas</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @hangar.eventos.pilar</span></div>
+    <div class="msg" id="m10">Hola! Soy Juan, de Upcoded, hacemos webs. Los vengo viendo por Instagram y el salón está muy bueno. Me fijé si tenían web y no encontré una propia: se pierden a la gente que busca "salón de eventos en Pilar" en Google y no está en las redes. Una web con galería y disponibilidad les sumaría consultas. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m10',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Monnalisa Salón de Eventos</div><div class="zone">Belén de Escobar · social/infantil</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @monnalisaescobar</span></div>
+    <div class="msg" id="m11">Hola, ¿cómo andan? Soy Juan, de Upcoded (hacemos webs para negocios). Los encontré por acá y me copó el salón. Vi que no tienen web propia — mucha gente busca directo en Google "salón de fiestas en Escobar" y ahí no aparecen, quedan solo en Instagram. Se soluciona fácil. ¿Te interesa que te muestre qué se puede hacer?</div>
+    <div class="actions"><button onclick="cp('m11',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Plana Eventos</div><div class="zone">Escobar · salón de eventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @plana.eventos</span></div>
+    <div class="msg" id="m12">Hola! Soy Juan, de Upcoded, hacemos webs. Los vi por Instagram y el salón se ve genial. Me fijé si tenían página web y no encontré una propia: hoy los ubica solo quien ya los sigue, y se pierden los que buscan "salón de eventos en Escobar" en Google. Una web simple con fotos y disponibilidad les abriría ese canal. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m12',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Vanalu Eventos</div><div class="zone">Belén de Escobar · salón de eventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @vanalu_eventos</span></div>
+    <div class="msg" id="m13">Hola! Soy Juan, de Upcoded, hacemos webs. Vengo siguiéndolos por Instagram y tienen un salón muy lindo. Lo único: no tienen una web donde la gente vea todo y consulte disponibilidad fuera de las redes, ni aparecen en Google cuando buscan salones en Escobar. ¿Te interesa que te cuente cómo lo armaríamos?</div>
+    <div class="actions"><button onclick="cp('m13',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Fiori Eventos</div><div class="zone">Escobar (Predio Floral) · eventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @fioriescobar</span></div>
+    <div class="msg" id="m14">Hola, ¿cómo andan? Soy Juan, de Upcoded (hacemos webs para negocios). Los encontré por acá y el predio se ve espectacular. Vi que no tienen web propia — quien organiza un evento busca y compara en Google, y ahí no aparecen, quedan solo en Instagram. Una web con galería y disponibilidad les sumaría reservas. ¿Te interesa que te muestre qué se puede hacer?</div>
+    <div class="actions"><button onclick="cp('m14',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Mini Town Eventos</div><div class="zone">Escobar · infantil</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @minitownescobar</span></div>
+    <div class="msg" id="m15">Hola! Soy Juan, de Upcoded, hacemos webs. Los vi por Instagram — el salón se ve bárbaro. Vi que usan un link de bio pero no tienen una web propia: hoy los ubica solo quien ya los sigue, y se pierden los papás que buscan "salón infantil en Escobar" en Google. Una web simple les abriría ese canal. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m15',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Bambini Eventos</div><div class="zone">Belén de Escobar · infantil</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @bambini_eventos</span></div>
+    <div class="msg" id="m16">Hola! Soy Juan, de Upcoded, hacemos webs. Vengo siguiéndolos por Instagram y el salón está muy bueno. Lo único: no tienen una web donde los papás vean todo y consulten disponibilidad fuera de las redes, ni aparecen en Google cuando buscan salones infantiles en Escobar. ¿Te interesa que te cuente cómo lo armaríamos?</div>
+    <div class="actions"><button onclick="cp('m16',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">La Esquina Eventos</div><div class="zone">Escobar · eventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @holalaesquina</span></div>
+    <div class="msg" id="m17">Hola, ¿cómo andan? Soy Juan, de Upcoded (hacemos webs para negocios). Los encontré por acá y me copó el lugar. Vi que no tienen web propia — mucha gente busca directo en Google "salón de eventos en Escobar" y ahí no aparecen, quedan solo en Instagram. Se soluciona fácil. ¿Te interesa que te muestre qué se puede hacer?</div>
+    <div class="actions"><button onclick="cp('m17',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Salón Fra Noi</div><div class="zone">Belén de Escobar (centro) · eventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span>Facebook: Salón Fra Noi de Escobar</span></div>
+    <div class="msg" id="m18">Hola! Soy Juan, de Upcoded, hacemos webs. Los encontré por las redes, el salón se ve muy bueno y bien ubicado en el centro de Escobar. Me llamó la atención que no tengan web propia — quien organiza un evento busca y compara en Google, y ahí no aparecen. Una web con galería y disponibilidad les sumaría consultas. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m18',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="sec-h"><h2>CABA</h2><small>Caballito · Flores · Belgrano</small></div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">SUM Salón de Fiestas</div><div class="zone">Caballito / Flores · infantil/multieventos</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @sum.salondefiestas</span><span class="waN">WA 11 7369-3720</span></div>
+    <div class="msg" id="m19">Hola! Soy Juan, de Upcoded, hacemos webs. Los vi por Instagram y el salón se ve genial. Me fijé si tenían página web y no encontré una propia: hoy los ubica solo quien ya los sigue, y se pierden los que buscan "salón de fiestas en Caballito" en Google. Una web simple con fotos y disponibilidad les abriría ese canal. ¿Te interesa que te cuente?</div>
+    <div class="actions"><button onclick="cp('m19',this)">📋 Copiar</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><div class="name">Espacio Urbano Eventos</div><div class="zone">Belgrano, CABA · eventos sociales</div></div><div class="badge b-noweb">sin web</div></div>
+    <div class="chan"><span class="ig">IG @espacio.urbano.eventos</span></div>
+    <div class="msg" id="m20">Hola! Soy Juan, de Upcoded, hacemos webs. Los encontré por Instagram, el espacio se ve muy bueno. Me llamó la atención que no tengan web propia — quien organiza un evento en Belgrano suele buscar y comparar en Google, y ahí no aparecen. Una web con galería y disponibilidad les sumaría consultas. ¿Te interesa que te cuente cómo sería?</div>
+    <div class="actions"><button onclick="cp('m20',this)">📋 Copiar</button></div>
+  </div>
+
+  <footer>Kit Upcoded · 20 salones verificados 09/2026 · Chequeá la bio de Instagram antes de enviar · Mandá de a pocos, no todos juntos (Instagram marca spam los DMs idénticos en fila)</footer>
+</div>
+<script>
+function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).innerText).then(function(){var o=btn.innerHTML;btn.innerHTML='✅ Copiado';btn.classList.add('copied');setTimeout(function(){btn.innerHTML=o;btn.classList.remove('copied')},1500);});}
+</script>
+</body>
+</html>

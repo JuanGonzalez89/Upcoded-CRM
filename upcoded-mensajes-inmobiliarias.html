@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upcoded · Mensajes de prospección — Inmobiliarias</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
+    --tx:#e8eaed; --mut:#9aa3b2; --acc:#4f8cff; --acc2:#3ad29f;
+    --wa:#25d366; --warn:#f5a524; --bad:#ff6b6b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;padding:32px 18px 80px}
+  .wrap{max-width:840px;margin:0 auto}
+  header{margin-bottom:28px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.3px}
+  .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  h1{font-size:26px;margin:14px 0 6px;font-weight:700}
+  .sub{color:var(--mut);font-size:14px;margin:0}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:12.5px;color:var(--mut)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .pill{width:9px;height:9px;border-radius:50%}
+  .funnel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:16px;font-size:12.5px;color:var(--mut)}
+  .step{background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:5px 12px}
+  .step b{color:var(--tx)}
+  .arrow{color:var(--acc)}
+  .sec{margin-top:34px}
+  .sec-h{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:16px}
+  .sec-h h2{font-size:16px;margin:0;font-weight:700}
+  .sec-h small{color:var(--mut);font-size:12.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;margin-bottom:14px}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .name{font-weight:700;font-size:15.5px}
+  .zone{color:var(--mut);font-size:12.5px;margin-top:2px}
+  .score{font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .s-hi{background:rgba(255,107,107,.15);color:#ff9d9d}
+  .s-mid{background:rgba(245,165,36,.15);color:#f7c56b}
+  .why{font-size:12.5px;color:var(--mut);margin:10px 0 12px}
+  .why b{color:var(--tx);font-weight:600}
+  .msg{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:13px 14px;font-size:14px;white-space:pre-wrap}
+  .actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  button,a.btn{font:inherit;font-size:12.5px;font-weight:600;border-radius:8px;padding:8px 13px;border:1px solid var(--line);
+    background:var(--card2);color:var(--tx);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+  button:hover,a.btn:hover{border-color:var(--acc)}
+  .btn-wa{background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.35);color:var(--wa)}
+  .btn-wa:hover{border-color:var(--wa)}
+  .copied{color:var(--acc2);border-color:var(--acc2)}
+  .chan{font-size:11.5px;color:var(--mut);margin-top:9px}
+  .chan b{color:var(--tx)}
+  .note{background:rgba(79,140,255,.07);border:1px solid rgba(79,140,255,.25);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--mut);margin-top:6px}
+  footer{margin-top:40px;color:var(--mut);font-size:12px;text-align:center;border-top:1px solid var(--line);padding-top:18px}
+  .tip{font-size:12.5px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:8px;padding:11px 14px;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="dot"></span> UPCODED</div>
+    <h1>Mensajes de prospección · Inmobiliarias</h1>
+    <p class="sub">CABA + Provincia de Buenos Aires · 20 prospectos analizados · canal: WhatsApp · tono: profesional pero humano</p>
+    <div class="legend">
+      <span><span class="pill" style="background:#ff6b6b"></span> Oportunidad alta</span>
+      <span><span class="pill" style="background:#f5a524"></span> Oportunidad media</span>
+      <span><span class="pill" style="background:#3ad29f"></span> Baja / no contactar</span>
+    </div>
+    <div class="funnel">
+      <span class="step"><b>1.</b> Mensaje</span><span class="arrow">→</span>
+      <span class="step"><b>2.</b> Diagnóstico gratis <span style="opacity:.7">(ya lo tenés)</span></span><span class="arrow">→</span>
+      <span class="step"><b>3.</b> Si hay interés: mockup</span><span class="arrow">→</span>
+      <span class="step"><b>4.</b> Propuesta</span>
+    </div>
+    <div class="tip">💡 Ningún mensaje promete un mockup: el gancho es <b>contarle qué encontraste</b> o pasarle un <b>diagnóstico rápido gratis</b> (que ya está hecho, no te cuesta nada). El mockup lo hacés solo cuando el prospecto muestra interés. El botón <b>WhatsApp</b> abre el chat con el mensaje pre-cargado — verificá el número antes de enviar (algunos son estimados a partir del teléfono publicado).</div>
+  </header>
+
+  <!-- ============ TIER 1 ============ -->
+  <div class="sec">
+    <div class="sec-h"><h2>1 · Listos para WhatsApp</h2><small>tienen número móvil / WA — empezá por acá</small></div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Inmobiliaria Colucci</div><div class="zone">Almagro y Villa del Parque, CABA</div></div><div class="score s-hi">Oportunidad 80</div></div>
+      <div class="why">Problema real: <b>el título de la página está vacío</b>, así que Google no muestra el nombre de la inmobiliaria y las dos sedes quedan invisibles en las búsquedas.</div>
+      <div class="msg" id="m1">Hola! Les escribo de Upcoded 👋 Estuve mirando la web de Colucci y noté un detalle: cuando aparecen en Google no se muestra el nombre de la inmobiliaria (es un tema técnico del título de la página). Con dos sedes como Almagro y Villa del Parque, eso les hace perder visibilidad frente a la competencia. Es de esas cosas que se corrigen rápido. ¿Te interesa que te cuente qué encontré? Sin compromiso.</div>
+      <div class="actions"><button onclick="cp('m1',this)">📋 Copiar</button><a class="btn btn-wa" onclick="wa('m1','541132690589')">💬 Abrir WhatsApp</a></div>
+      <div class="chan">WhatsApp: <b>+54 11 3269-0589</b> · IG @inmobiliariacolucci</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Cassia Alfano Propiedades</div><div class="zone">Caballito, CABA</div></div><div class="score s-hi">Oportunidad 78</div></div>
+      <div class="why">Problema real: <b>título vacío</b> (no aparece nombre en Google) y una meta description con 40 barrios pegados sin formato (SEO obsoleto).</div>
+      <div class="msg" id="m2">Hola, ¿cómo andan? Les escribo de Upcoded. Estuve viendo la web de Cassia Propiedades y noté que en Google no aparece el nombre de la inmobiliaria — el título de la página está vacío, así que cuesta que los encuentren por marca en Caballito. Es algo puntual que se puede mejorar. ¿Te interesa que te comente qué vi?</div>
+      <div class="actions"><button onclick="cp('m2',this)">📋 Copiar</button><a class="btn btn-wa" onclick="wa('m2','5491130018644')">💬 Abrir WhatsApp</a></div>
+      <div class="chan">WhatsApp: <b>+54 9 11 3001-8644</b> · consultas@cassiaalfano.com.ar</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Andrade Inmobiliaria</div><div class="zone">San Isidro, PBA</div></div><div class="score s-mid">Oportunidad 72</div></div>
+      <div class="why">Problema real: <b>título genérico</b> («Inicio - Andrade», sin San Isidro ni rubro) y sin meta description, así que pierde las búsquedas tipo "inmobiliaria San Isidro".</div>
+      <div class="msg" id="m3">Hola, ¿cómo va? Les escribo de Upcoded. Vi la web de Andrade Inmobiliaria y está bien armada, pero le falta un par de ajustes para rendir en Google — por ejemplo el título dice solo "Inicio - Andrade", sin nombrar San Isidro ni el rubro, así que las búsquedas de "inmobiliaria San Isidro" no la levantan. ¿Te interesa que te cuente qué se puede mejorar?</div>
+      <div class="actions"><button onclick="cp('m3',this)">📋 Copiar</button><a class="btn btn-wa" onclick="wa('m3','5491156966225')">💬 Abrir WhatsApp</a></div>
+      <div class="chan">WhatsApp: <b>+54 9 11 5696-6225</b> · andradeinmobiliaria@gmail.com</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Caballito Propiedades</div><div class="zone">Caballito, CABA</div></div><div class="score s-mid">Oportunidad 68</div></div>
+      <div class="why">Problema real: <b>sitio muy liviano</b> (poco contenido, listado limitado), sin meta description y sin Instagram vinculado.</div>
+      <div class="msg" id="m4">Hola! Les escribo de Upcoded. Estuve mirando la web de Caballito Propiedades — funciona bien, pero está bastante liviana de contenido y sin Instagram vinculado, que en el rubro suele ser de donde entran muchas consultas. ¿Te interesa que te cuente cómo se podría aprovechar mejor?</div>
+      <div class="actions"><button onclick="cp('m4',this)">📋 Copiar</button><a class="btn btn-wa" onclick="wa('m4','5491141994076')">💬 Abrir WhatsApp</a></div>
+      <div class="chan">WhatsApp: <b>+54 9 11 4199-4076</b> · FB /caballito.propiedades</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Red Gestionar Inmobiliaria</div><div class="zone">Almagro, CABA</div></div><div class="score s-mid">Oportunidad 60</div></div>
+      <div class="why">Problema real: <b>atienden solo de 11 a 17 hs</b> y la web no ofrece canal de consultas fuera de ese horario; además sin meta description.</div>
+      <div class="msg" id="m5">Hola, ¿cómo andan? Les escribo de Upcoded. Vi que Red Gestionar atiende de 11 a 17, pero la web no tiene un canal para dejar consultas fuera de ese horario — se pueden estar perdiendo contactos de gente que mira propiedades a la noche o el finde. ¿Te interesa que te cuente cómo se puede resolver?</div>
+      <div class="actions"><button onclick="cp('m5',this)">📋 Copiar</button><a class="btn btn-wa" onclick="wa('m5','541151594061')">💬 Abrir WhatsApp</a></div>
+      <div class="chan">WhatsApp: <b>+54 11 5159-4061</b> · giselle@redgestionar.com.ar</div>
+    </div>
+  </div>
+
+  <!-- ============ TIER 2 ============ -->
+  <div class="sec">
+    <div class="sec-h"><h2>2 · Alta oportunidad, sin WhatsApp</h2><small>los mejores prospectos, pero hay que ir por email o llamada</small></div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Massey &amp; Massey</div><div class="zone">La Plata, PBA</div></div><div class="score s-hi">Oportunidad 98</div></div>
+      <div class="why">El de mayor oportunidad de todos: <b>no tiene web propia</b>, solo aparece en directorios de terceros. Contacto: solo teléfono. Va por llamada o WhatsApp si ese móvil lo tiene.</div>
+      <div class="msg" id="m6">Hola, ¿cómo están? Les escribo de Upcoded. Vi que Massey & Massey todavía no tiene una web propia — hoy los encuentran solo si ya tienen el teléfono, y se pierden las búsquedas de gente que pone "inmobiliaria La Plata" en Google. Nos dedicamos justo a armar webs para inmobiliarias que aparecen y captan esas consultas. ¿Les interesa que les cuente cómo lo encararíamos? Sin compromiso.</div>
+      <div class="actions"><button onclick="cp('m6',this)">📋 Copiar</button><a class="btn btn-wa" onclick="wa('m6','5492214591020')">💬 Probar WhatsApp</a></div>
+      <div class="chan">Canal: <b>llamada / probar WhatsApp al 0221-15-459-1020</b> · sin email publicado</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Inmobiliaria Belgrano</div><div class="zone">Sarandí, Avellaneda, PBA</div></div><div class="score s-hi">Oportunidad 93</div></div>
+      <div class="why">Problema real: <b>la web no es responsive</b> (se ve rota en el celular, imágenes que no cargan) y el título no coincide con el negocio. Contacto: email + teléfono fijo → va por email.</div>
+      <div class="msg" id="m7">Asunto: La web de Inmobiliaria Belgrano en el celular
+
+Hola, ¿cómo están? Les escribo de Upcoded. Estaba viendo la web de Inmobiliaria Belgrano y noté que en el celular se ve cortada — sin diseño adaptado y con algunas imágenes que no cargan. Lo comento porque hoy casi todas las consultas de propiedades entran desde el teléfono, así que probablemente estén perdiendo contactos sin darse cuenta.
+
+Es algo que se puede resolver sin dar vuelta todo. ¿Les interesa que les cuente qué haría falta? Sin compromiso.
+
+Saludos,
+[Tu nombre] — Upcoded</div>
+      <div class="actions"><button onclick="cp('m7',this)">📋 Copiar (email)</button><a class="btn" target="_blank" href="mailto:info@inmobibelgrano.com.ar?subject=La%20web%20de%20Inmobiliaria%20Belgrano%20en%20el%20celular">✉️ Abrir email</a></div>
+      <div class="chan">Email: <b>info@inmobibelgrano.com.ar</b> · Tel (011) 4204-3335</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Diego Martin Propiedades</div><div class="zone">Tigre, PBA</div></div><div class="score s-mid">Oportunidad 79</div></div>
+      <div class="why">Problema real: <b>sin WhatsApp ni redes</b> (inusual en el rubro) y meta description cortada a mitad de palabra. Contacto: solo teléfono fijo → llamada.</div>
+      <div class="msg" id="m8">Hola, ¿cómo va? Les escribo de Upcoded. Vi la web de Diego Martin Propiedades y me llamó la atención que no tenga botón de WhatsApp ni redes enlazadas — en el rubro es de donde entra la mayoría de las consultas rápidas, así que puede estar quedando gente afuera. ¿Les interesa que lo charlemos?</div>
+      <div class="actions"><button onclick="cp('m8',this)">📋 Copiar</button></div>
+      <div class="chan">Canal: <b>llamada al (011) 4731-5006</b> · sin email/WA publicado</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Favaretto Negocios Inmobiliarios</div><div class="zone">Olivos, Vicente López, PBA</div></div><div class="score s-mid">Oportunidad 68</div></div>
+      <div class="why">Problema real: <b>WordPress desactualizado (6.0)</b> — riesgo de seguridad y plugins rotos — sin meta description y sin botón de WhatsApp. Contacto: email + IG.</div>
+      <div class="msg" id="m9">Hola! Les escribo de Upcoded. Estuve mirando la web de Favaretto y vi que está sobre una versión vieja de WordPress (6.0), lo que suele traer riesgos de seguridad y plugins que se rompen con el tiempo. Además le falta el botón de WhatsApp, que en el rubro es clave. ¿Te interesa que te pase un diagnóstico rápido de lo que encontré?</div>
+      <div class="actions"><button onclick="cp('m9',this)">📋 Copiar</button><a class="btn" target="_blank" href="mailto:favarettopropiedades@gmail.com?subject=La%20web%20de%20Favaretto">✉️ Email</a></div>
+      <div class="chan">Email: <b>favarettopropiedades@gmail.com</b> · IG @inmobiliaria.favaretto</div>
+    </div>
+
+    <div class="card">
+      <div class="top"><div><div class="name">Helvaci Sociedad Inmobiliaria</div><div class="zone">La Plata, PBA</div></div><div class="score s-mid">Oportunidad 76</div></div>
+      <div class="why">Problema real: <b>carga en casi 5 segundos</b> (la más lenta del relevamiento), sin meta description y título con símbolos rotos. Contacto: IG / teléfono fijo.</div>
+      <div class="msg" id="m10">Hola, ¿cómo andan? Les escribo de Upcoded. Estuve viendo la web de Helvaci y noté que tarda casi 5 segundos en cargar — en el celular con datos móviles eso hace que mucha gente se vaya antes de ver una propiedad. Es de las cosas que más impacto tienen. ¿Te interesa que te pase un diagnóstico rápido de lo que vi?</div>
+      <div class="actions"><button onclick="cp('m10',this)">📋 Copiar</button></div>
+      <div class="chan">Canal: <b>IG @helvaci.inmobiliaria / Tel (0221) 421-2518</b></div>
+    </div>
+  </div>
+
+  <!-- ============ TIER 3 ============ -->
+  <div class="sec">
+    <div class="sec-h"><h2>3 · Baja prioridad / no contactar todavía</h2><small>webs bien resueltas — no forces un pitch acá</small></div>
+    <div class="note">
+      <b style="color:var(--tx)">Solución Inmobiliaria</b> (63), <b style="color:var(--tx)">KEYMEX San Isidro</b> (66), <b style="color:var(--tx)">Holder</b> (62), <b style="color:var(--tx)">Berrino</b> (48), <b style="color:var(--tx)">Palermo Propiedades</b> (45) y <b style="color:var(--tx)">Menacho</b> (42): problemas menores (velocidad, título, un WhatsApp roto). Sirven para una campaña más suave de "optimización" más adelante, no para un pitch de rediseño ahora.<br><br>
+      <b style="color:var(--tx)">Alma Di Matteo</b> (32), <b style="color:var(--tx)">Zona Norte</b> (30), <b style="color:var(--tx)">Ceccone</b> (18) e <b style="color:var(--tx)">IZR</b> (15): webs modernas y bien resueltas. <b style="color:var(--bad)">No contactar</b> — escribirles "vi un problema" te quema la credibilidad.
+    </div>
+  </div>
+
+  <footer>Kit de prospección · Upcoded · Verificá cada número y dato antes de enviar. Los mensajes usan problemas reales detectados el 17/08/2026 — si pasó tiempo, reanalizá la web antes de escribir.</footer>
+</div>
+
+<script>
+function cp(id,btn){
+  var t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(function(){
+    var o=btn.innerHTML;btn.innerHTML='✅ Copiado';btn.classList.add('copied');
+    setTimeout(function(){btn.innerHTML=o;btn.classList.remove('copied')},1600);
+  });
+}
+function wa(id,num){
+  var t=document.getElementById(id).innerText;
+  window.open('https://wa.me/'+num+'?text='+encodeURIComponent(t),'_blank');
+}
+</script>
+</body>
+</html>

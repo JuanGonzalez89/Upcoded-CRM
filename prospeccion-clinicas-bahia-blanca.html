@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prospección · Clínicas de Bahía Blanca · Diseño Web</title>
+<style>
+:root{
+  --bg:#0b0f14; --panel:#121a23; --panel2:#18232f; --line:#22303f;
+  --tx:#e6edf3; --tx2:#8b9bad; --acc:#3ddc97; --acc2:#4aa8ff;
+  --crit:#ff5d5d; --high:#ff9f43; --mid:#ffd93d; --low:#4aa8ff; --none:#7c8797;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
+.kicker{color:var(--acc);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:10px 0 8px;letter-spacing:-.02em}
+.sub{color:var(--tx2);max-width:70ch}
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:28px 0 12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.kpi .n{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.kpi .l{color:var(--tx2);font-size:12.5px;margin-top:6px}
+h2{font-size:22px;margin:44px 0 6px;letter-spacing:-.01em}
+h2 .num{color:var(--acc);font-size:13px;font-weight:700;display:block;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.note{color:var(--tx2);font-size:13.5px;margin:0 0 18px}
+/* distribución */
+.dist{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.bar{display:flex;height:34px;border-radius:8px;overflow:hidden;margin-bottom:14px}
+.bar span{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#08121b}
+.leg{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--tx2)}
+.leg i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px}
+/* tabla */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:940px;font-size:13.5px}
+th{position:sticky;top:0;background:var(--panel2);text-align:left;padding:12px 14px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--tx2);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:#16212c}
+.name{font-weight:700}
+.name a{color:var(--tx);text-decoration:none;border-bottom:1px dotted var(--tx2)}
+.name a:hover{color:var(--acc)}
+.spec{color:var(--tx2);font-size:12px;font-weight:400;margin-top:2px}
+.scorecell{min-width:120px}
+.sbar{height:7px;background:#0d151d;border-radius:4px;overflow:hidden;margin-top:5px}
+.sbar i{display:block;height:100%}
+.sn{font-weight:800;font-size:15px}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.b-critico{background:rgba(255,93,93,.16);color:var(--crit)}
+.b-inexistente{background:rgba(124,135,151,.2);color:#b5c0cd}
+.b-bajo{background:rgba(255,159,67,.16);color:var(--high)}
+.b-medio{background:rgba(255,217,61,.14);color:var(--mid)}
+.b-alto{background:rgba(74,168,255,.16);color:var(--low)}
+.probs{color:var(--tx2);font-size:12.5px;margin:0;padding-left:16px}
+.probs li{margin-bottom:3px}
+.contact{font-size:12.5px;color:var(--tx2);white-space:nowrap}
+.contact a{color:var(--acc2);text-decoration:none}
+.tag{display:inline-block;background:#0d151d;border:1px solid var(--line);color:var(--tx2);border-radius:5px;padding:1px 6px;font-size:11px;margin:2px 3px 0 0}
+.tag.bad{border-color:#4a2020;color:#ff8a8a}
+/* fichas */
+.cards{grid-template-columns:repeat(auto-fit,minmax(370px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column}
+.card.rank1{border-color:#4a2626}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px}
+.chead h3{margin:0;font-size:18px;letter-spacing:-.01em}
+.rank{font-size:11px;font-weight:800;color:#08121b;background:var(--acc);border-radius:6px;padding:2px 8px;height:fit-content}
+.cmeta{color:var(--tx2);font-size:12.5px;margin-bottom:14px}
+.diag{background:#0d151d;border-left:3px solid var(--crit);border-radius:0 8px 8px 0;padding:12px 14px;margin-bottom:14px}
+.diag h4{margin:0 0 7px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crit)}
+.diag ol{margin:0;padding-left:17px;font-size:13px;color:#c9d4df}
+.diag li{margin-bottom:5px}
+.value{font-size:13.5px;color:#c9d4df;margin-bottom:14px}
+.value b{color:var(--acc)}
+.msg{background:#0d151d;border:1px dashed var(--line);border-radius:10px;padding:14px;font-size:13px;white-space:pre-wrap;color:#d5dee7;margin-top:auto}
+.msg .lbl{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:8px;font-weight:700}
+button.copy{background:transparent;border:1px solid var(--line);color:var(--tx2);border-radius:7px;padding:5px 11px;font-size:11.5px;cursor:pointer;margin-top:10px;font-weight:600}
+button.copy:hover{border-color:var(--acc);color:var(--acc)}
+/* stats nicho */
+.stats{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.stat .p{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.stat .d{color:var(--tx2);font-size:12.5px;margin-top:4px}
+.stat .track{height:6px;background:#0d151d;border-radius:4px;margin-top:10px;overflow:hidden}
+.stat .track i{display:block;height:100%;background:var(--acc)}
+.concl{background:linear-gradient(135deg,#132a22,#121a23);border:1px solid #23453a;border-radius:16px;padding:24px;margin-top:20px}
+.concl p{margin:0 0 10px;color:#c9d4df}
+.concl p:last-child{margin:0}
+/* export */
+.export{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.export pre{background:#0d151d;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font-size:12px;color:#b9c6d3;margin:12px 0 0;max-height:280px}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--tx2);font-size:12.5px}
+@media(max-width:640px){.wrap{padding:22px 14px 60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Informe de prospección · 14 de agosto de 2026</div>
+  <h1>Clínicas y centros médicos<br>de Bahía Blanca</h1>
+  <p class="sub">22 centros de salud reales analizados en Bahía Blanca (Buenos Aires, Argentina), puntuados según la oportunidad que representan para un servicio de <strong>diseño web</strong>. Cada dato de contacto y cada problema técnico fue verificado sobre el sitio real: HTTPS y estado del certificado, viewport, title, meta description, H1, Open Graph, redes enlazadas, stack y versiones de servidor.</p>
+
+  <div class="grid kpis">
+    <div class="kpi"><div class="n">22</div><div class="l">Centros analizados</div></div>
+    <div class="kpi"><div class="n" style="color:var(--crit)">12</div><div class="l">Oportunidad alta (score ≥ 78)</div></div>
+    <div class="kpi"><div class="n" style="color:var(--none)">5</div><div class="l">Sin sitio web (23%)</div></div>
+    <div class="kpi"><div class="n" style="color:var(--high)">4</div><div class="l">Sin HTTPS o con SSL roto</div></div>
+    <div class="kpi"><div class="n" style="color:var(--mid)">8</div><div class="l">Con stack obsoleto</div></div>
+  </div>
+</header>
+
+<h2><span class="num">01 — Resumen ejecutivo</span>Dónde está la oportunidad</h2>
+<p class="note">Distribución de los 22 prospectos por nivel de oportunidad para diseño web.</p>
+<div class="dist">
+  <div class="bar">
+    <span style="background:#ff5d5d;width:9.1%">2</span>
+    <span style="background:#7c8797;width:22.7%">5</span>
+    <span style="background:#ff9f43;width:22.7%">5</span>
+    <span style="background:#ffd93d;width:22.7%">5</span>
+    <span style="background:#4aa8ff;width:22.8%">5</span>
+  </div>
+  <div class="leg">
+    <span><i style="background:#ff5d5d"></i>Crítico (95-100) — sitio roto o inseguro</span>
+    <span><i style="background:#7c8797"></i>Sin web (90-95)</span>
+    <span><i style="background:#ff9f43"></i>Bajo (78-89) — web muy deficiente</span>
+    <span><i style="background:#ffd93d"></i>Medio (45-77)</span>
+    <span><i style="background:#4aa8ff"></i>Alto (0-44) — ya tiene web decente</span>
+  </div>
+</div>
+
+<h2 style="margin-top:34px"><span class="num">Top 5 recomendados</span>Por dónde empezar</h2>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+  <div class="kpi"><div class="n" style="font-size:20px;color:var(--crit)">98</div><div class="l"><b style="color:var(--tx)">Venier Odontología</b><br>Certificado SSL vencido: el navegador bloquea la web</div></div>
+  <div class="kpi"><div class="n" style="font-size:20px;color:var(--crit)">95</div><div class="l"><b style="color:var(--tx)">Centro Creare</b><br>Home en blanco + PHP 5.6 de 2018 sin HTTPS</div></div>
+  <div class="kpi"><div class="n" style="font-size:20px;color:var(--none)">95</div><div class="l"><b style="color:var(--tx)">Clínica Privada Modelo</b><br>Sin web y con el dominio parecido ocupado por otra clínica</div></div>
+  <div class="kpi"><div class="n" style="font-size:20px;color:var(--high)">88</div><div class="l"><b style="color:var(--tx)">Instituto Médico de la Mujer</b><br>Dominio raíz devuelve 85 bytes vacíos</div></div>
+  <div class="kpi"><div class="n" style="font-size:20px;color:var(--high)">85</div><div class="l"><b style="color:var(--tx)">COI Odontología</b><br>El título del sitio es "Home | My Site 2"</div></div>
+</div>
+
+<h2><span class="num">02 — Tabla de prospectos</span>Los 22 centros, ordenados por oportunidad</h2>
+<p class="note">Ordenados de mayor a menor score. Los enlaces abren la web real de cada centro.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>Centro</th><th>Contacto</th><th>Score</th><th>Nivel</th><th>Problemas detectados</th></tr></thead>
+<tbody id="tb"></tbody>
+</table>
+</div>
+
+<h2><span class="num">03 — Fichas detalladas</span>Los 8 mejores prospectos, con mensaje listo para enviar</h2>
+<p class="note">Cada mensaje menciona un problema real y verificable de esa web concreta. Revisá el dato antes de enviar: las webs cambian.</p>
+<div class="grid cards" id="cards"></div>
+
+<h2><span class="num">04 — Estadísticas del nicho</span>Cómo está la salud digital del sector en Bahía Blanca</h2>
+<div class="grid stats">
+  <div class="stat"><div class="p">23%</div><div class="d">no tiene ningún sitio web (5 de 22)</div><div class="track"><i style="width:23%"></i></div></div>
+  <div class="stat"><div class="p">18%</div><div class="d">sin HTTPS o con certificado roto (4 de 22)</div><div class="track"><i style="width:18%;background:var(--crit)"></i></div></div>
+  <div class="stat"><div class="p">77%</div><div class="d">sin etiqueta H1 en la home (17 de 22)</div><div class="track"><i style="width:77%;background:var(--high)"></i></div></div>
+  <div class="stat"><div class="p">41%</div><div class="d">sin meta description (9 de 22)</div><div class="track"><i style="width:41%;background:var(--mid)"></i></div></div>
+  <div class="stat"><div class="p">55%</div><div class="d">sin Open Graph: el link se ve pelado en WhatsApp (12 de 22)</div><div class="track"><i style="width:55%;background:var(--mid)"></i></div></div>
+  <div class="stat"><div class="p">36%</div><div class="d">sin redes sociales enlazadas desde la web (8 de 22)</div><div class="track"><i style="width:36%;background:var(--acc2)"></i></div></div>
+  <div class="stat"><div class="p">36%</div><div class="d">stack obsoleto: jQuery 1.x/2.x, PHP 5.6/7.4, CentOS EOL (8 de 22)</div><div class="track"><i style="width:36%;background:var(--crit)"></i></div></div>
+  <div class="stat"><div class="p">1</div><div class="d">no responsive: Hospital Privado del Sur (viewport sin width=device-width)</div><div class="track"><i style="width:5%"></i></div></div>
+</div>
+
+<div class="concl">
+  <p><b>El nicho está maduro para diseño web.</b> Solo 4 de 22 centros (18%) tienen un sitio que hoy se considere correcto: Clínica Privada Bahiense, Paredes Dental, Centro de Ojos Bahía y CETYD. El 82% restante tiene algo concreto y demostrable para arreglar.</p>
+  <p><b>El patrón dominante no es "no tienen web": es "tienen una web abandonada".</b> Doce centros tienen sitio pero con fallas que se ven en 30 segundos — certificados vencidos, títulos de plantilla sin configurar, jQuery de 2011, homes en blanco. Eso facilita el primer contacto: no hay que convencer de que necesitan una web, hay que mostrarles la que ya tienen rota.</p>
+  <p><b>Sub-nicho más caliente: odontología y fertilidad.</b> Los cuatro centros odontológicos van de score 98 a 25, y los tres de fertilidad/ginecología (Creare, IMM, Ameris) tienen los tres problemas graves de seguridad — son rubros de alto ticket donde el paciente compara online antes de llamar.</p>
+  <p><b>Los 5 sin web (Modelo, CARDHE, Ce.Re.Na., Consultorios CIAN, SW Dermatología)</b> son ciclo de venta más largo pero proyecto completo desde cero, sin migración ni contenido heredado.</p>
+</div>
+
+<h2><span class="num">05 — Datos exportables</span>Contactos para tu CRM</h2>
+<div class="export">
+  <p class="note" style="margin:0">Los datos crudos están en <code>prospeccion-clinicas-bahia-blanca.json</code>, listos para importar en un CRM o Google Sheets. Abajo, los contactos directos con los que podés arrancar hoy.</p>
+  <button class="copy" onclick="copiar('csvbox',this)">Copiar CSV completo</button>
+  <button class="copy" onclick="copiar('mailbox',this)">Copiar solo emails</button>
+  <button class="copy" onclick="copiar('telbox',this)">Copiar solo teléfonos</button>
+  <pre id="csvbox"></pre>
+  <pre id="mailbox" style="display:none"></pre>
+  <pre id="telbox" style="display:none"></pre>
+</div>
+
+<footer>
+  Informe generado el 14 de agosto de 2026 · 22 centros de salud de Bahía Blanca · Análisis técnico realizado sobre los sitios en vivo mediante peticiones HTTP y verificación de certificados TLS. Los datos de contacto provienen de las propias webs y de directorios públicos (Páginas Amarillas, infoisinfo, Doctoralia, argentino.com.ar). Verificá teléfonos y direcciones antes de contactar: pueden haber cambiado.
+</footer>
+
+</div>
+
+<script>
+const D=[
+{r:1,n:"Venier Odontología",e:"Odontología general, implantes, ortodoncia",w:"https://venierodontologia.com.ar/",t:null,m:"consultorioodontovenier@gmail.com",d:"Brandsen 558",s:98,lv:"critico",tg:["SSL VENCIDO","sin H1","sin OG"],tgbad:1,p:["Certificado SSL vencido el 20/07/2026: el navegador muestra «Tu conexión no es privada» y bloquea la entrada","Sin H1 en la home","Sin Open Graph: el link compartido no muestra imagen"]},
+{r:2,n:"Centro Creare",e:"Ginecología y fertilidad",w:"http://centrocreare.com.ar/",t:null,m:null,d:"Bahía Blanca",s:95,lv:"critico",tg:["sin HTTPS","PHP 5.6","home vacía"],tgbad:1,p:["La home devuelve una página en blanco con redirect por JavaScript: sin <html>, sin título","PHP 5.6.21 sobre IIS: sin parches de seguridad desde 2018","Sin HTTPS y sin redes sociales"]},
+{r:3,n:"Clínica Privada Modelo",e:"Clínica general, internación",w:null,t:"0291 454-5845",m:null,d:"Lavalle 42",s:95,lv:"inexistente",tg:["SIN WEB"],tgbad:1,p:["Sin sitio web: solo figura en directorios de terceros","clinicamodelo.com.ar pertenece a otra clínica de Paraná: confusión de marca","Sin canal propio para turnos ni cartilla de obras sociales"]},
+{r:4,n:"CARDHE",e:"Centro Asistencial Regional de Hemoterapia",w:null,t:null,m:null,d:"Alvarado 1840",s:93,lv:"inexistente",tg:["SIN WEB"],tgbad:1,p:["Sin web propia siendo centro regional de referencia","Información dispersa en directorios que no controla","Sin canal para requisitos de donación ni preparación de estudios"]},
+{r:5,n:"Centro de Rehabilitación Ce.Re.Na.",e:"Rehabilitación, kinesiología, acupuntura, pilates",w:null,t:null,m:null,d:"H. Yrigoyen 564",s:93,lv:"inexistente",tg:["SIN WEB"],tgbad:1,p:["Sin web en un rubro donde el paciente compara online antes de elegir","Servicios diferenciales (acupuntura, pilates) invisibles en Google","Sin galería de instalaciones ni presentación del equipo"]},
+{r:6,n:"Consultorios CIAN",e:"Pediatría integral, psicología, fonoaudiología",w:null,t:null,m:null,d:"Zelarrayán 1650 PB",s:92,lv:"inexistente",tg:["SIN WEB"],tgbad:1,p:["Sin web: los padres que buscan fonoaudiología infantil no lo encuentran","Equipo interdisciplinario sin presentación pública","Sin información de obras sociales ni turnos"]},
+{r:7,n:"SW Dermatología Clínica y Estética",e:"Dermatología clínica y estética · Dra. Susana Wagner",w:null,t:null,m:null,d:"V. Alsina 35, piso 10",s:90,lv:"inexistente",tg:["SIN WEB","solo Facebook"],tgbad:1,p:["Toda la presencia depende de una página de Facebook que no posiciona en Google","Rubro de alto ticket y muy competido: los que tienen web capturan las búsquedas","Sin catálogo de tratamientos ni resultados propios"]},
+{r:8,n:"Instituto Médico de la Mujer",e:"Ginecología, fertilidad, salud integral de la mujer",w:"https://immbahiablanca.com.ar/",t:null,m:null,d:"Bahía Blanca",s:88,lv:"bajo",tg:["home vacía","CentOS EOL","sin H1"],tgbad:1,p:["El dominio raíz devuelve 85 bytes: una página vacía con redirect por JavaScript","Apache/CentOS con OpenSSL 1.0.2k, ambos fuera de soporte de seguridad","Sin H1 y sin redes sociales enlazadas"]},
+{r:9,n:"COI Odontología Bahía Blanca",e:"Odontología general, implantes, ortodoncia",w:"https://www.odontologiabahiablanca.com/",t:"291-4562646",m:null,d:"Saavedra 39, piso 2",s:85,lv:"bajo",tg:['title "My Site 2"',"sin meta desc","655 KB"],tgbad:1,p:["El título del sitio es «Home | My Site 2»: el placeholder de fábrica de Wix, visible en Google y en la pestaña","Sin meta description ni H1","655 KB en la home y sin redes sociales enlazadas"]},
+{r:10,n:"Multimédica Espacio Profesional",e:"Centro médico multiespecialidad",w:"https://multimedicabahia.com.ar/",t:"291-4522625",m:"multimedicabahia@gmail.com",d:"Mitre 582",s:84,lv:"bajo",tg:["jQuery 1.6.4 (2011)","sin meta desc"],tgbad:1,p:["jQuery 1.6.4, de 2011, con vulnerabilidades XSS conocidas","Título «:: MULTIMEDICA ::» sin ciudad ni especialidad, y sin meta description","9 KB de contenido: sin fotos, sin profesionales, sin especialidades"]},
+{r:11,n:"Centro Médico Castelli",e:"Centro médico, turnos y recetas",w:"https://www.medicoscastelli.com.ar/",t:"(0291) 4565111",m:null,d:"Bahía Blanca",s:82,lv:"bajo",tg:["jQuery 1.8.2 (2012)","meta desc vacía"],tgbad:1,p:["jQuery 1.8.2 (2012) y meta description declarada pero vacía","Sin H1 ni Open Graph: el link compartido por WhatsApp aparece pelado","8 KB de contenido: sin especialidades, profesionales ni obras sociales"]},
+{r:12,n:"Hospital Privado del Sur",e:"Hospital privado polivalente, +70 años",w:"https://www.ambb.org.ar/hps",t:"(0291) 4550270",m:null,d:"Las Heras 164",s:78,lv:"bajo",tg:["NO responsive","sin dominio propio"],tgbad:1,p:["Viewport sin width=device-width: en celular la página no se adapta bien","Sin dominio propio, vive en una subcarpeta de ambb.org.ar: cero autoridad SEO como marca","Sin Open Graph, sin H1, y redes que apuntan a la Asociación Médica"]},
+{r:13,n:"AMERIS",e:"Fertilidad, ginecología y urología",w:"http://www.amerisbb.com.ar/",t:"+54 9 291 461-3428",m:"info@amerisbb.com.ar",d:"Zeballos 236",s:68,lv:"medio",tg:["sin HTTPS","PHP 7.4"],tgbad:1,p:["Sin HTTPS: el navegador marca «No seguro» en un sitio de tratamientos de fertilidad","PHP 7.4.33 sin soporte de seguridad, con WordPress expuesto sin TLS","Sin H1 y sin Open Graph"]},
+{r:14,n:"Instituto Diagnóstico",e:"Diagnóstico por imágenes, mamografía digital",w:"http://idiagnostico.com.ar/",t:"+54 291 504-3578",m:"institutodiagnostico@hotmail.com",d:"Alsina 575",s:65,lv:"medio",tg:["sin HTTPS","email Hotmail"],tgbad:1,p:["Sin HTTPS en un sitio que ofrece turnos online: los datos del paciente viajan sin cifrar","Sin meta description, sin H1 y sin Open Graph","Email institucional en Hotmail en vez de dominio propio"]},
+{r:15,n:"Dermatología CIAL",e:"Dermatología clínica y estética, depilación",w:"https://dermatologiacial.com.ar/",t:"+54 291 524-1874",m:"secretaria@dermatologiacial.com.ar",d:"Bahía Blanca",s:62,lv:"medio",tg:["jQuery 2.1.1","13 KB"],tgbad:0,p:["jQuery 2.1.1 (2014), sin mantenimiento y con vulnerabilidades conocidas","Meta description que solo repite el título; sin H1 ni Open Graph","13 KB de contenido: sin catálogo de tratamientos en un rubro que se vende con imágenes"]},
+{r:16,n:"DomusDerma",e:"Consultorio dermatológico",w:"https://www.domusderma.com.ar/",t:"+54 291 512-7394",m:null,d:"Pellegrini 683",s:55,lv:"medio",tg:["sin meta desc","PHP 7.4"],tgbad:0,p:["Sin meta description ni Open Graph: el link compartido en redes se ve vacío","PHP 7.4.33 sin soporte de seguridad","Solo Instagram enlazado, sin WhatsApp de turnos en la home"]},
+{r:17,n:"AMICUS Bahía Blanca",e:"Consultorios médicos y turnos online",w:"https://amicus.com.ar/",t:null,m:"consultoriobelgrano323@gmail.com",d:"Terrada 232",s:52,lv:"medio",tg:["sin H1","texto sin acentos"],tgbad:0,p:["Sin H1 y sin Open Graph","Meta description amontonada sin puntuación","Email en Gmail y textos del sitio sin acentos"]},
+{r:18,n:"LUM Diagnóstico por Imágenes",e:"Ecografías y diagnóstico por imágenes",w:"https://lumdiagnostico.com/",t:"291 463-2487",m:null,d:"Dorrego 135",s:45,lv:"medio",tg:["falta de ortografía en title","WhatsApp roto"],tgbad:1,p:["Falta de ortografía en el título visible en Google: «Ecógrafías» en vez de «Ecografías»","Enlace de WhatsApp roto: apunta a wa.me/ sin número","Sin meta description, sin H1 y sin Open Graph"]},
+{r:19,n:"CETYD",e:"Traumatología y medicina del deporte",w:"https://cetyd.com.ar/",t:"+54 9 291 526-3078",m:"contacto@cetyd.com.ar",d:"Fuerte Argentino 337",s:38,lv:"alto",tg:["sin redes","PHP 7.4"],tgbad:0,p:["Sin redes sociales enlazadas, en un rubro deportivo donde Instagram es el canal natural","Sin H1 y PHP 7.4.33 sin soporte","1,38 s de carga con 167 KB: mejorable"]},
+{r:20,n:"Centro de Ojos Bahía",e:"Oftalmología clínica y quirúrgica · Dr. Ramiro Marchesi",w:"https://centrodeojosbahia.com/",t:"291-4444489",m:"centrodeojosbahia@gmail.com",d:"Bahía Blanca",s:32,lv:"alto",tg:["sin meta desc","email Gmail"],tgbad:0,p:["Sin meta description: Google arma el resumen por su cuenta","Email de contacto en Gmail en vez del dominio propio","Sin contenido de captación para búsquedas tipo «operación de cataratas Bahía Blanca»"]},
+{r:21,n:"Paredes Dental",e:"Estética dental, implantes, ortodoncia",w:"https://www.paredesdental.com/",t:"+54 9 291 509-2658",m:null,d:"Güemes 987",s:25,lv:"alto",tg:["sin meta desc"],tgbad:0,p:["Sin meta description pese a tener Open Graph completo","311 KB y 1,14 s de carga: hay margen de optimización","Sin bloque de reseñas de Google en el sitio"]},
+{r:22,n:"Clínica Privada Bahiense",e:"Salud mental, guardia 24 hs",w:"https://www.clinicaprivadabahiense.com.ar/",t:"(0291) 451-4488",m:"consultasyturnos.cpb@gmail.com",d:"Moreno 212",s:15,lv:"alto",tg:["React/Vercel","sitio moderno"],tgbad:0,p:["Sitio moderno y bien construido: no es prospecto para rediseño","El title no incluye el nombre de la clínica ni la ciudad","Algunos textos sin acentos («atencion», «acompanamiento»)"]}
+];
+
+const COL={critico:"#ff5d5d",inexistente:"#7c8797",bajo:"#ff9f43",medio:"#ffd93d",alto:"#4aa8ff"};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+document.getElementById('tb').innerHTML=D.map(x=>`
+<tr>
+ <td style="color:var(--tx2)">${x.r}</td>
+ <td class="name">${x.w?`<a href="${x.w}" target="_blank" rel="noopener">${esc(x.n)}</a>`:esc(x.n)}
+   <div class="spec">${esc(x.e)}</div>
+   <div>${x.tg.map(t=>`<span class="tag${x.tgbad?' bad':''}">${esc(t)}</span>`).join('')}</div></td>
+ <td class="contact">${x.t?`<a href="tel:${x.t.replace(/[^0-9+]/g,'')}">${esc(x.t)}</a><br>`:''}${x.m?`<a href="mailto:${x.m}">${esc(x.m)}</a><br>`:''}${esc(x.d)}<br>
+   <a href="https://www.google.com/maps/search/${encodeURIComponent(x.n+' '+x.d+' Bahía Blanca')}" target="_blank" rel="noopener">Ver en Maps ↗</a></td>
+ <td class="scorecell"><span class="sn" style="color:${COL[x.lv]}">${x.s}</span>
+   <div class="sbar"><i style="width:${x.s}%;background:${COL[x.lv]}"></i></div></td>
+ <td><span class="badge b-${x.lv}">${x.lv}</span></td>
+ <td><ul class="probs">${x.p.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></td>
+</tr>`).join('');
+
+const FICHAS=[
+{r:1,pv:"Recuperar el acceso al sitio hoy mismo con un certificado renovado y automatizado, y rehacer la home sobre una base que no vuelva a caerse: estructura semántica con H1, tarjetas por tratamiento y previsualización correcta al compartir el link por WhatsApp.",
+ msg:`Hola, equipo de Venier Odontología:
+
+Quise entrar a venierodontologia.com.ar y el navegador me bloqueó con el cartel «Tu conexión no es privada». El certificado de seguridad venció el 20 de julio, así que hace casi un mes cualquiera que busque la clínica ve esa pantalla en vez de la web.
+
+Es algo que se resuelve rápido y se puede dejar renovándose solo. Ya que hay que meter mano, aproveché para mirar el resto: la home no tiene H1 ni previsualización al compartirla por WhatsApp.
+
+¿Te paso el detalle de los tres puntos sin compromiso?`},
+{r:2,pv:"Rehacer el sitio sobre una base actual con HTTPS: home real en el dominio raíz (no un redirect por JavaScript), servidor con soporte vigente y formulario de consulta cifrado, que es lo mínimo para un centro de fertilidad.",
+ msg:`Hola, Centro Creare:
+
+Entré a centrocreare.com.ar y la página principal aparece en blanco: el dominio no carga contenido, redirige por JavaScript a una carpeta interna. Google indexa esa página vacía, así que la clínica se está perdiendo búsquedas.
+
+Además el sitio funciona sin HTTPS y sobre PHP 5.6, una versión sin actualizaciones de seguridad desde 2018. Para un centro que recibe consultas de pacientes es un riesgo evitable.
+
+Si querés te muestro exactamente qué se ve al entrar, sin compromiso.`},
+{r:3,pv:"Sitio institucional desde cero con dominio propio, especialidades, cartilla de obras sociales, equipo médico y contacto directo; más la ficha de Google Business para aparecer en el mapa cuando alguien busca «clínica Bahía Blanca».",
+ msg:`Hola, Clínica Privada Modelo:
+
+Busqué la clínica en Google para ver los horarios y no encontré sitio propio, solo fichas en directorios de terceros. Peor: el dominio clinicamodelo.com.ar es de otra clínica, en Paraná, así que quien busque así termina en la competencia.
+
+Trabajo haciendo sitios para centros de salud. Con una web propia quedarían las especialidades, la cartilla de obras sociales y el teléfono bajo control de ustedes.
+
+¿Te interesa que te muestre cómo se vería?`},
+{r:8,pv:"Home real en el dominio raíz, migración a un servidor con soporte vigente y estructura pensada para las búsquedas del rubro (fertilidad, ginecología), con contenido que hoy no existe: tratamientos, equipo, primera consulta.",
+ msg:`Hola, Instituto Médico de la Mujer:
+
+Entré a immbahiablanca.com.ar y el dominio devuelve una página vacía: recién después de un salto por JavaScript aparece el contenido. Google entra por el dominio raíz, así que ve la página en blanco.
+
+También vi que el servidor corre sobre versiones de CentOS y OpenSSL que ya no reciben parches de seguridad.
+
+Me dedico a sitios para centros de salud. ¿Querés que te pase el detalle de lo que encontré?`},
+{r:9,pv:"Reemplazar la plantilla de Wix a medio configurar por un sitio propio, liviano, con título y descripción reales, fichas por tratamiento, antes/después y turnos por WhatsApp integrados.",
+ msg:`Hola, COI Odontología:
+
+Encontré la web de la clínica y noté algo que conviene corregir ya: el título del sitio quedó como «Home | My Site 2», que es el texto de fábrica de la plantilla. Es lo que aparece en Google y en la pestaña del navegador, así que quien busca la clínica ve eso en vez del nombre.
+
+Tampoco hay descripción para Google, y la home pesa 655 KB, lo que la hace lenta en celular.
+
+Son arreglos concretos. ¿Te muestro cómo se ve hoy en los resultados de búsqueda?`},
+{r:10,pv:"Rediseño completo sobre base actual: presentación de los profesionales y especialidades del espacio, fotos reales del centro, turnos por WhatsApp y una home que cargue rápido en celular.",
+ msg:`Hola, Multimédica:
+
+Miré multimedicabahia.com.ar y el sitio está construido con jQuery 1.6.4, una librería de 2011 con fallas de seguridad ya conocidas. Además el título en Google es «:: MULTIMEDICA ::», sin la ciudad ni las especialidades, así que quien busca «centro médico Bahía Blanca» difícilmente los encuentre.
+
+Hoy la web no muestra los profesionales, las especialidades ni fotos del espacio de Mitre 582.
+
+¿Te paso una propuesta de cómo quedaría?`},
+{r:11,pv:"Sitio nuevo con listado de especialidades y profesionales, obras sociales, y el sistema de turnos y recetas integrado y visible, sobre una base que cargue rápido y se vea bien al compartirse.",
+ msg:`Hola, Centro Médico Castelli:
+
+Revisé medicoscastelli.com.ar y encontré dos cosas para corregir: la descripción que lee Google está declarada pero vacía, así que el buscador arma el resumen por su cuenta; y el sitio usa jQuery de 2012.
+
+Aparte, cuando alguien comparte el link del centro por WhatsApp aparece pelado, sin imagen ni texto.
+
+Hago sitios para centros médicos de la zona. ¿Querés que te muestre el detalle?`},
+{r:12,pv:"Dominio propio para el hospital, con un sitio responsive que funcione bien en celular (de donde viene la mayoría del tráfico), servicios, guardia, cartilla y staff, y autoridad SEO propia en vez de depender de la Asociación Médica.",
+ msg:`Hola, Hospital Privado del Sur:
+
+Abrí la web del hospital desde el celular y la página no se adapta bien a la pantalla: falta una configuración básica de diseño móvil, y hoy la mayoría entra desde el teléfono.
+
+También noté que el hospital no tiene dominio propio, funciona dentro de una carpeta de ambb.org.ar. Para una institución con más de 70 años, eso limita mucho su posicionamiento en Google.
+
+¿Te interesa que te muestre cómo se ve hoy en un celular?`}
+];
+
+document.getElementById('cards').innerHTML=FICHAS.map((f,i)=>{
+ const x=D.find(d=>d.r===f.r);
+ return `<div class="card${i===0?' rank1':''}">
+  <div class="chead"><h3>${esc(x.n)}</h3><span class="rank">#${i+1} · ${x.s}</span></div>
+  <div class="cmeta">${esc(x.e)} · ${esc(x.d)}${x.t?' · '+esc(x.t):''}${x.w?` · <a href="${x.w}" target="_blank" rel="noopener" style="color:var(--acc2)">ver web ↗</a>`:''}</div>
+  <div class="diag"><h4>3 problemas concretos</h4><ol>${x.p.map(p=>`<li>${esc(p)}</li>`).join('')}</ol></div>
+  <div class="value"><b>Propuesta de valor:</b> ${esc(f.pv)}</div>
+  <div class="msg" id="msg${i}"><span class="lbl">Mensaje de contacto en frío</span>${esc(f.msg)}</div>
+  <button class="copy" onclick="copiar('msg${i}',this)">Copiar mensaje</button>
+ </div>`;
+}).join('');
+
+// exportables
+const csv=[['nombre','especialidad','web','telefono','email','direccion','score','nivel'].join(',')]
+ .concat(D.map(x=>[x.n,x.e,x.w||'SIN WEB',x.t||'',x.m||'',x.d,x.s,x.lv].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(','))).join('\n');
+document.getElementById('csvbox').textContent=csv;
+document.getElementById('mailbox').textContent=D.filter(x=>x.m).map(x=>x.m).join(', ');
+document.getElementById('telbox').textContent=D.filter(x=>x.t).map(x=>`${x.n}: ${x.t}`).join('\n');
+
+function copiar(id,btn){
+ const el=document.getElementById(id);
+ let txt=el.tagName==='PRE'?el.textContent:el.textContent.replace(/^Mensaje de contacto en frío/,'').trim();
+ if(el.style.display==='none'){el.style.display='block'}
+ navigator.clipboard.writeText(txt).then(()=>{
+   const o=btn.textContent;btn.textContent='✓ Copiado';btn.style.color='var(--acc)';
+   setTimeout(()=>{btn.textContent=o;btn.style.color=''},1600);
+ });
+}
+</script>
+</body>
+</html>

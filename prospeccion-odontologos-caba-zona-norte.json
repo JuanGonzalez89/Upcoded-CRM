@@ -1,0 +1,646 @@
+{
+  "meta": {
+    "nicho": "Consultorios odontológicos",
+    "ciudad": "CABA Zona Norte (Belgrano, Núñez, Palermo, Colegiales, Recoleta), Buenos Aires, Argentina",
+    "servicio_ofrecido": "Diseño y desarrollo web (Upcoded)",
+    "fecha_analisis": "2026-08-18",
+    "total_prospectos": 20,
+    "metodo": "WebSearch para relevar negocios reales + verificación de cada web abriéndola en un navegador real (Chrome vía automatización), ejecutando JavaScript en la página ya renderizada para chequear HTTPS, viewport, title, meta description, H1, Open Graph, botón de WhatsApp (incluye los que cargan por JS) y redes sociales enlazadas. No se usó solo fetch estático, para no perder elementos que dependen de JavaScript.",
+    "ofrecido_por": "Juan, Upcoded (upcoded.dev) — desarrollo web a medida, trato directo con el programador, presupuesto cerrado, entregas en semanas, desde USD 300"
+  },
+  "prospectos": [
+    {
+      "id": 1,
+      "nombre": "Mansilla Centro Odontológico",
+      "zona": "Núñez",
+      "especialidad": "Odontología integral",
+      "web": null,
+      "telefono": null,
+      "email": null,
+      "direccion": "Gral. Lucio Norberto Mansilla 3338, Núñez, CABA",
+      "instagram": "https://www.instagram.com/mansillacentroodontologico/",
+      "facebook": null,
+      "whatsapp": null,
+      "score": 97,
+      "nivel_digital": "inexistente",
+      "tecnico": {
+        "https": null,
+        "responsive": null,
+        "title": null,
+        "meta_description": null,
+        "h1": null,
+        "open_graph": null,
+        "verificado": "Sin sitio propio localizado. Solo aparece en Instagram y en directorios de terceros (Cidi Group)."
+      },
+      "problemas": [
+        "No tiene web propia: toda la presencia digital depende de Instagram y de directorios que no controla",
+        "Quien busca 'odontólogo en Núñez' en Google no encuentra un sitio propio del consultorio, solo listados de terceros",
+        "Sin canal propio para mostrar especialidades, profesionales ni pedir turno online"
+      ],
+      "mensaje_whatsapp": "Hola! Soy Juan, de Upcoded — hacemos webs a medida para consultorios. Estuve buscando la web de Mansilla Centro Odontológico y descubrí que no tienen sitio propio: toda la presencia está en Instagram y en directorios de terceros. Eso significa que quien busca \"odontólogo en Núñez\" en Google probablemente no los encuentra. Si querés te cuento rápido qué vi y por qué importa, sin compromiso. ¿Te viene bien?"
+    },
+    {
+      "id": 2,
+      "nombre": "Estudio Odontológico Dr. Cunningham",
+      "zona": "Núñez",
+      "especialidad": "Odontología general",
+      "web": null,
+      "telefono": "+54 11 2156-1445",
+      "email": null,
+      "direccion": "Manuel Ugarte 2548, Núñez, CABA",
+      "instagram": null,
+      "facebook": null,
+      "whatsapp": "+54 11 2156-1445",
+      "score": 96,
+      "nivel_digital": "inexistente",
+      "tecnico": {
+        "https": null,
+        "responsive": null,
+        "title": null,
+        "meta_description": null,
+        "h1": null,
+        "open_graph": null,
+        "verificado": "Sin sitio propio localizado. Solo figura con teléfono y horarios en directorios de odontólogos de la zona."
+      },
+      "problemas": [
+        "Sin web propia: no aparece en Google más que en directorios genéricos, sin control sobre esa información",
+        "El teléfono de contacto tiene formato de celular: podría estar recibiendo consultas por WhatsApp hoy pero sin ningún canal propio que lo muestre",
+        "Sin presentación de especialidades, horarios propios ni forma de reservar turno online"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded, hacemos webs para consultorios odontológicos. Busqué el consultorio del Dr. Cunningham en Núñez y no encontré una web propia, solo aparece en directorios que ustedes no controlan. Eso hace que se pierdan pacientes que buscan directo en Google antes de llamar. Te puedo contar en 5 minutos qué encontré y qué opciones hay, sin compromiso. ¿Dale?"
+    },
+    {
+      "id": 3,
+      "nombre": "Oral Salud - Consultorio Odontológico",
+      "zona": "Colegiales",
+      "especialidad": "Odontología general, prótesis, implantes, odontopediatría",
+      "web": null,
+      "telefono": "4551-9958",
+      "email": null,
+      "direccion": "Av. Federico Lacroze 2556, Colegiales, CABA",
+      "instagram": null,
+      "facebook": null,
+      "whatsapp": null,
+      "score": 95,
+      "nivel_digital": "inexistente",
+      "tecnico": {
+        "https": null,
+        "responsive": null,
+        "title": null,
+        "meta_description": null,
+        "h1": null,
+        "open_graph": null,
+        "verificado": "Sin sitio propio localizado. Solo aparece en guías locales (guiabayres, licuo) con teléfono fijo."
+      },
+      "problemas": [
+        "Sin web propia: la única presencia digital es en guías locales genéricas",
+        "El teléfono publicado es una línea fija, sin ningún canal de WhatsApp visible para agendar turno",
+        "En un rubro donde se compara online antes de elegir, no tienen forma de mostrar precios, especialidades ni testimonios propios"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded, armamos webs para consultorios. Vi que Oral Salud en Colegiales no tiene sitio propio, solo figura en guías locales. Con la cantidad de gente que busca \"dentista en Colegiales\" antes de sacar turno, esos contactos se van a la competencia que sí aparece en Google. Si querés te cuento qué vi y por qué importa, gratis y sin compromiso."
+    },
+    {
+      "id": 4,
+      "nombre": "Odontología Castillo",
+      "zona": "Palermo",
+      "especialidad": "Implantes, ortodoncia, odontopediatría, estética",
+      "web": "https://odontologacastillo.com/",
+      "telefono": "(011) 4863-5717 / 15 5720-2692",
+      "email": null,
+      "direccion": "Bulnes 1330 PB \"A\", Palermo, CABA",
+      "instagram": null,
+      "facebook": null,
+      "whatsapp": "15 5720-2692",
+      "score": 93,
+      "nivel_digital": "critico",
+      "tecnico": {
+        "https": null,
+        "responsive": null,
+        "title": null,
+        "meta_description": null,
+        "h1": null,
+        "open_graph": null,
+        "verificado": "El dominio odontologacastillo.com no carga: Chrome devuelve error de conexión ('no se puede obtener acceso a esta página'). Verificado navegando directamente."
+      },
+      "problemas": [
+        "El sitio no carga: quien entra desde Google encuentra una página de error, no el consultorio",
+        "Pierden cualquier búsqueda orgánica que llegue directo al dominio, que hoy no sirve para nada",
+        "Sin presencia alternativa (no se encontraron redes sociales activas) que compense la caída del sitio"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Estaba mirando webs de consultorios en Palermo y quise entrar a la de Odontología Castillo y descubrí que el sitio no carga, tira error de conexión. O sea que ahora mismo, si alguien los busca en Google y hace clic, no llega a nada. Te cuento el detalle si querés, gratis y sin compromiso."
+    },
+    {
+      "id": 5,
+      "nombre": "Odontología Recoleta (Dr. Natalio Abbastante)",
+      "zona": "Recoleta",
+      "especialidad": "Odontología general, atiende OSDE, Medifé, Prevención Salud",
+      "web": "https://odontologiarecoleta.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Recoleta, CABA (dirección exacta no disponible: el sitio está caído)",
+      "instagram": null,
+      "facebook": "https://www.facebook.com/odontoreco/",
+      "whatsapp": null,
+      "score": 92,
+      "nivel_digital": "critico",
+      "tecnico": {
+        "https": null,
+        "responsive": null,
+        "title": null,
+        "meta_description": null,
+        "h1": null,
+        "open_graph": null,
+        "verificado": "El dominio odontologiarecoleta.com.ar está completamente caído, tanto con www como sin www: Chrome devuelve error de conexión en ambas variantes. Verificado navegando directamente dos veces."
+      },
+      "problemas": [
+        "El dominio completo no responde (con y sin www): el sitio no existe para nadie que llegue desde Google",
+        "Todo lo que indexó Google de este sitio (contacto.html, institucional.html) hoy son links muertos",
+        "Sin forma de confirmar dirección, teléfono ni horarios porque la única fuente propia está caída"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Buscando consultorios en Recoleta encontré Odontología Recoleta (Dr. Abbastante) y descubrí que el dominio está completamente caído, no carga ni con ni sin www. Cualquiera que llegue desde Google se encuentra con un error. Te cuento qué vi y por qué pasa esto si querés, gratis y sin compromiso."
+    },
+    {
+      "id": 6,
+      "nombre": "Clínica Jorge Galante",
+      "zona": "Recoleta",
+      "especialidad": "Odontología de alta complejidad",
+      "web": "http://www.jorgegalante.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Rodríguez Peña 1775, Recoleta, CABA",
+      "instagram": "https://www.instagram.com/clinicadr.galante/",
+      "facebook": "https://www.facebook.com/people/Galante-Alta-Complejidad-Odontol%C3%B3gica/100005531234683",
+      "whatsapp": null,
+      "score": 87,
+      "nivel_digital": "critico",
+      "tecnico": {
+        "https": false,
+        "https_detalle": "Sirve por HTTP puro (jorgegalante.com.ar/es/), sin certificado SSL. Verificado en el navegador: Chrome marca la conexión como no segura.",
+        "responsive": true,
+        "title": "Clinica Jorge Galante",
+        "meta_description": false,
+        "h1": false,
+        "open_graph": false,
+        "verificado": "Navegado directamente. Sin H1, sin meta description, sin botón de WhatsApp detectado en la página."
+      },
+      "problemas": [
+        "Sin HTTPS: el navegador marca la web como 'No segura', algo que espanta especialmente a quien va a dejar sus datos para pedir un turno",
+        "Sin H1 y sin meta description: Google no tiene con qué armar el resumen del sitio en los resultados de búsqueda",
+        "Sin botón de WhatsApp visible: solo redes sociales, sin un canal directo de contacto en la home"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Entré a la web de Clínica Jorge Galante y noté que no tiene HTTPS: el navegador la marca como 'no segura', algo que espanta bastante a quien está por dejar sus datos para pedir un turno. Te cuento qué más encontré si te interesa, gratis y sin compromiso."
+    },
+    {
+      "id": 7,
+      "nombre": "Odontología Olazábal",
+      "zona": "Belgrano",
+      "especialidad": "Odontología general y estética",
+      "web": "https://www.odontologiaolazabal.com/",
+      "telefono": "11 5992-9919",
+      "email": null,
+      "direccion": "Olazábal 2546, PB 1, Belgrano, CABA",
+      "instagram": null,
+      "facebook": null,
+      "whatsapp": null,
+      "score": 77,
+      "nivel_digital": "bajo",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "ODONTOLOGÍA OLAZABAL",
+        "meta_description": true,
+        "h1": true,
+        "h1_detalle": "6 etiquetas H1 en la misma página (debería haber una sola por página): confunde a Google sobre cuál es el tema principal",
+        "open_graph": false,
+        "verificado": "Navegado directamente. Sin botón de WhatsApp detectado en ningún lado de la home."
+      },
+      "problemas": [
+        "Sin botón de WhatsApp: quien entra desde el celular tiene que buscar el teléfono a mano para poder escribir",
+        "Sin Open Graph: al compartir el link por WhatsApp o redes no aparece imagen ni descripción, se ve pelado",
+        "6 etiquetas H1 en la home: mal uso del HTML que le complica a Google entender la jerarquía del contenido"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Miré la web de Odontología Olazábal y descubrí que no tiene botón de WhatsApp en ningún lado: alguien que llega desde Google tiene que buscar el teléfono para poder escribirles, y ahí se pierden bastantes contactos. Te cuento el resto de lo que encontré si querés, sin compromiso."
+    },
+    {
+      "id": 8,
+      "nombre": "PM Odontología Integral (Pérez Macazaga)",
+      "zona": "Colegiales",
+      "especialidad": "Odontología integral, implantes, ortodoncia, prótesis",
+      "web": "https://pmodontologia.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Palpa 3491, Colegiales, CABA",
+      "instagram": "https://www.instagram.com/perezmacazaga",
+      "facebook": "https://www.facebook.com/PerezMacazaga/",
+      "whatsapp": "+54 9 11 6227-7052",
+      "score": 75,
+      "nivel_digital": "bajo",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Pérez Macazaga Odontología Integral en Colegiales - CABA",
+        "meta_description": true,
+        "h1": false,
+        "h1_detalle": "0 etiquetas H1 en la home",
+        "open_graph": true,
+        "open_graph_detalle": "El título de Open Graph dice 'PM Odontología Integral en Zona Congreso', distinto al de la página ('...en Colegiales'). Al compartir el link, aparece el barrio equivocado.",
+        "tiempo_carga_s": 4.588,
+        "verificado": "Navegado directamente y medido el tiempo de carga real en el navegador."
+      },
+      "problemas": [
+        "Sin ninguna etiqueta H1 en la home: a Google le falta la señal más básica de qué trata la página",
+        "El título que se ve al compartir el link (Open Graph) dice 'Zona Congreso' en vez de 'Colegiales': confunde a quien busca por su barrio",
+        "4,6 segundos de carga en el navegador real: bastante lento para un celular con datos móviles"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Estuve viendo la web de PM Odontología (Pérez Macazaga) y noté que tarda casi 5 segundos en cargar, y que cuando se comparte el link aparece como 'Zona Congreso' en vez de Colegiales. Puede estar confundiendo a gente que busca por su barrio. Te cuento el resto si te interesa, gratis y sin compromiso."
+    },
+    {
+      "id": 9,
+      "nombre": "IOBA - Institutos Odontológicos Buenos Aires",
+      "zona": "Núñez",
+      "especialidad": "Odontología integral, prevención",
+      "web": "https://ioba.com.ar/",
+      "telefono": "0810-888-0202",
+      "email": "ioba@fibertel.com.ar",
+      "direccion": "Av. Cabildo 4190, Núñez, CABA",
+      "instagram": "https://www.instagram.com/ioba_odontologia/",
+      "facebook": "https://www.facebook.com/IOBA.CentroOdontologico",
+      "whatsapp": null,
+      "score": 67,
+      "nivel_digital": "bajo",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "IOBA Institutos Odontológicos Buenos Aires - Av. Cabildo 4190 - 0810 888 0202",
+        "title_detalle": "El teléfono está metido directamente en el <title>, lo que en el resultado de Google se ve como spam de directorio en vez de un centro odontológico serio",
+        "meta_description": false,
+        "h1": false,
+        "open_graph": false,
+        "verificado": "Navegado directamente."
+      },
+      "problemas": [
+        "El título de la página (lo que se ve en la pestaña y en Google) es básicamente el teléfono: 'IOBA... 0810 888 0202', sin mencionar especialidades ni ubicación de forma natural",
+        "Sin meta description ni H1: Google arma el resumen de búsqueda por su cuenta con texto suelto",
+        "Sin Open Graph: el link compartido por WhatsApp se ve sin imagen ni descripción"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Entré a la web de IOBA en Cabildo 4190 y noté que el título de la página en Google es directamente el teléfono, sin descripción de qué hacen ni dónde están. Eso hace que en el buscador se vea más como spam de directorio que como un centro odontológico. Te cuento el resto si querés, sin compromiso."
+    },
+    {
+      "id": 10,
+      "nombre": "Odonto del Virrey",
+      "zona": "Belgrano",
+      "especialidad": "Ortodoncia con alineadores invisibles",
+      "web": "https://www.odontodelvirrey.com/",
+      "telefono": "5272-5018 / 4782-0203",
+      "email": null,
+      "direccion": "Virrey del Pino 2433, Belgrano, CABA",
+      "instagram": "https://www.instagram.com/odontodelvirrey/",
+      "facebook": null,
+      "whatsapp": "+54 11 5729-6562",
+      "score": 65,
+      "nivel_digital": "bajo",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Odonto del Virrey | Belgrano Argentina",
+        "meta_description": true,
+        "h1": true,
+        "open_graph": true,
+        "facebook_detalle": "El botón de Facebook de la web no lleva a la página del consultorio: apunta a facebook.com/wix, el link de fábrica que deja Wix cuando no se termina de configurar el sitio",
+        "verificado": "Navegado directamente, se hizo clic revisando el href real del botón de Facebook."
+      },
+      "problemas": [
+        "El botón de Facebook apunta a facebook.com/wix (el placeholder de fábrica de Wix): nunca lo configuraron, así que ese canal está roto desde que se armó la web",
+        "Quien hace clic pensando en sumarse a la comunidad de Facebook del consultorio no llega a ningún lado",
+        "Señal de que la web se armó con una plantilla y quedaron pasos sin terminar"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Miré la web de Odonto del Virrey y descubrí que el botón de Facebook no lleva a la página del consultorio: apunta a facebook.com/wix, el link de fábrica que Wix deja por defecto cuando no se termina de configurar el sitio. Te cuento el resto si querés, gratis y sin compromiso."
+    },
+    {
+      "id": 11,
+      "nombre": "Clínica Ranalli - Implantes y Estética Dental",
+      "zona": "Recoleta",
+      "especialidad": "Implantes, estética dental, ortodoncia",
+      "web": "https://implantesdentales.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Av. Santa Fe 2130, 1°B, Recoleta, CABA",
+      "instagram": "https://www.instagram.com/clinicaranalli",
+      "facebook": "https://www.facebook.com/implantesdentalesranalli",
+      "whatsapp": null,
+      "score": 63,
+      "nivel_digital": "bajo",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "IMPLANTES Y ESTÉTICA DENTAL | CLÍNICA RANALLI",
+        "meta_description": true,
+        "meta_description_detalle": "Tiene un error de tipeo: 'Especialistas en IMPLANTES y ESTÉTICA DENAL' (falta la T de DENTAL), visible en el resultado de Google",
+        "h1": true,
+        "open_graph": false,
+        "verificado": "Navegado directamente. Sin botón de WhatsApp detectado."
+      },
+      "problemas": [
+        "La meta description tiene un error de tipeo ('DENAL' en vez de 'DENTAL') justo en el texto que la gente lee en Google antes de hacer clic",
+        "Sin botón de WhatsApp visible en la home, en un rubro donde la mayoría coordina turnos por ahí",
+        "Sin Open Graph: el link se ve pelado al compartirlo"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Vi la web de Clínica Ranalli y noté que en la descripción que aparece en Google hay un error de tipeo: dice 'ESTÉTICA DENAL' en vez de DENTAL, justo en lo primero que lee la gente antes de entrar al sitio. También noté que no tienen botón de WhatsApp. Te cuento el resto si te interesa, sin compromiso."
+    },
+    {
+      "id": 12,
+      "nombre": "Centro Odontológico Prof. Dr. Alexis Chudnovsky",
+      "zona": "Belgrano",
+      "especialidad": "Implantes, estética dental, diseño de sonrisa, ortodoncia invisible",
+      "web": "https://www.centroach.com/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Ciudad de la Paz 1679, 1° A, Belgrano, CABA",
+      "instagram": "https://www.instagram.com/centroach/",
+      "facebook": "https://www.facebook.com/centroach/",
+      "whatsapp": "+54 9 11 2280-5555",
+      "score": 59,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "CENTRO ODONTOLÓGICO PROF. DR. ALEXIS CHUDNOVSKY",
+        "meta_description": true,
+        "meta_description_detalle": "Volcaron prácticamente todo el contenido de la página en la meta description (más de 300 caracteres, listando cada servicio): Google la corta y no queda un resumen claro",
+        "h1": true,
+        "h1_detalle": "6 etiquetas H1 en la misma página",
+        "open_graph": true,
+        "verificado": "Navegado directamente."
+      },
+      "problemas": [
+        "La meta description tiene todo el contenido de la home volcado sin editar: Google la trunca y se pierde el mensaje",
+        "6 etiquetas H1 en una sola página: mal uso semántico que le dificulta a Google identificar el tema principal",
+        "Con esa cantidad de contenido bien podrían tener páginas propias por tratamiento en vez de todo apilado en una sola"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Entré a la web del Centro Chudnovsky y noté que tiene 6 títulos H1 en la misma página (debería haber uno solo), y la descripción que se ve en Google es un párrafo larguísimo con todo mezclado. Eso le complica a Google entender de qué trata cada sección. Te cuento el resto si querés, gratis y sin compromiso."
+    },
+    {
+      "id": 13,
+      "nombre": "Consultorios Odontológicos Belgrano (COB)",
+      "zona": "Belgrano",
+      "especialidad": "Odontología integral, ortodoncia, implantes, odontopediatría, endodoncia",
+      "web": "https://cobelgrano.com/",
+      "telefono": "(011) 4783-4520",
+      "email": null,
+      "direccion": "Sucre 2494, Belgrano, CABA",
+      "instagram": null,
+      "facebook": null,
+      "whatsapp": "+54 9 11 3878-6782",
+      "score": 54,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Consultorios Odontológicos Belgrano | COB",
+        "meta_description": false,
+        "h1": true,
+        "open_graph": false,
+        "verificado": "Navegado directamente, incluida la página de contacto (da 404 en /contacto pese a que el formulario está en la home)."
+      },
+      "problemas": [
+        "Sin meta description: cuando alguien busca 'odontólogo en Belgrano', Google arma el resumen con texto suelto de la página en vez del mensaje que ellos elegirían",
+        "Sin Open Graph: el link se comparte sin imagen ni descripción",
+        "El link /contacto que uno esperaría que exista da error 404 (la página de contacto real está mezclada en la home)"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Miré la web de COB en Sucre 2494 y descubrí que no tiene meta description (el resumen que aparece debajo del título en Google): así, cuando alguien busca 'odontólogo en Belgrano', Google inventa el texto con lo que encuentra suelto en la página. Te cuento el resto si te interesa, sin compromiso."
+    },
+    {
+      "id": 14,
+      "nombre": "Laura Fusaro - Odontología Responsable",
+      "zona": "Colegiales",
+      "especialidad": "Limpieza, caries, blanqueamiento, extracciones, prótesis, implantes",
+      "web": "https://www.odfusaro.com/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Álvarez Thomas 925, Colegiales, CABA",
+      "instagram": "https://www.instagram.com/od.fusaro/",
+      "facebook": null,
+      "whatsapp": null,
+      "score": 53,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Dentista en Colegiales | Odontología Particular en CABA",
+        "meta_description": true,
+        "meta_description_detalle": "Está declarada en el código pero vacía (content=\"\"): en Google no aparece ninguna descripción, solo el título",
+        "h1": true,
+        "open_graph": false,
+        "verificado": "Navegado directamente. Sin redes sociales enlazadas desde la web (el Instagram se encontró por búsqueda aparte, no está linkeado en el sitio)."
+      },
+      "problemas": [
+        "La meta description existe en el código pero está vacía: en Google el resultado se ve solo con el título, sin ningún texto debajo",
+        "Sin redes sociales enlazadas desde la web, pese a tener Instagram activo aparte",
+        "Sin botón de WhatsApp visible en la home: no hay forma directa de escribir sin buscar el teléfono en otro lado"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Entré a tu web y noté que la meta description está declarada pero vacía, así que en Google no aparece ninguna descripción debajo del título, solo el nombre. Tampoco vi redes sociales enlazadas desde el sitio. Te cuento el resto si querés, gratis y sin compromiso."
+    },
+    {
+      "id": 15,
+      "nombre": "Dental Palermo (Dr. Claudio Sorrentino)",
+      "zona": "Palermo",
+      "especialidad": "Odontología digital, prevención, tratamiento, mantenimiento",
+      "web": "https://www.dentalpalermo.com.ar/",
+      "telefono": "+54 11 4826-1505",
+      "email": null,
+      "direccion": "Charcas 3127, Palermo, CABA",
+      "instagram": "https://www.instagram.com/reel/CrB0f2cAMna/",
+      "instagram_detalle": "El link de Instagram de la web no apunta al perfil, sino a un reel puntual",
+      "facebook": "https://www.facebook.com/dentalpalermoargentina/",
+      "whatsapp": "+54 9 11 3794-5890",
+      "score": 49,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Odontología Digital en Palermo | Dental Palermo",
+        "meta_description": true,
+        "h1": true,
+        "open_graph": true,
+        "tiempo_carga_s": 0.522,
+        "verificado": "Navegado directamente, se revisó el href real del botón de Instagram."
+      },
+      "problemas": [
+        "El botón de Instagram no lleva al perfil del consultorio, sino a un reel específico ya viejo: quien hace clic esperando ver el perfil completo cae en un video suelto y se va",
+        "Sin forma de saber, desde ese link, si siguen publicando o están activos",
+        "Se pierde la oportunidad de mostrar el perfil completo con reseñas y contenido reciente"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Miré la web de Dental Palermo y noté que el botón de Instagram no lleva al perfil, sino a un reel suelto de hace tiempo. Alguien que hace clic pensando en ver el perfil completo, cae en un video viejo y se va. Te cuento el resto si querés, sin compromiso."
+    },
+    {
+      "id": 16,
+      "nombre": "Dental Arcos",
+      "zona": "Palermo",
+      "especialidad": "Implantes, ortodoncia, endodoncia, estética",
+      "web": "https://www.dentalarcos.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Fitz Roy 1988, Palermo, CABA",
+      "instagram": "https://www.instagram.com/dentalarcos/",
+      "facebook": "https://www.facebook.com/dental.arcos.3",
+      "whatsapp": "1133403962 (link roto, ver problemas)",
+      "score": 47,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Dental Arcos | Clínica Odontológica en Palermo, Buenos Aires",
+        "meta_description": true,
+        "h1": true,
+        "open_graph": false,
+        "whatsapp_detalle": "El link de WhatsApp está armado como wa.me/1133403962, sin el código de país (549). En varios celulares ese formato no abre el chat automáticamente.",
+        "verificado": "Navegado directamente, se revisó el href real del botón de WhatsApp."
+      },
+      "problemas": [
+        "El botón de WhatsApp tiene el número mal armado (sin el 549 de Argentina): en varios celulares no abre el chat directo",
+        "Sin Open Graph: el link se comparte sin imagen ni descripción",
+        "Contenido muy escaso en la home (menos de 2000 caracteres de texto)"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Entré a la web de Dental Arcos y probé el botón de WhatsApp: el link está armado sin el código de país, así que en varios celulares no abre directo el chat. Te cuento el resto si te interesa, gratis y sin compromiso."
+    },
+    {
+      "id": 17,
+      "nombre": "Rannelucci Odontología (Dr. Luis Rannelucci)",
+      "zona": "Recoleta",
+      "especialidad": "Implantes, prótesis, rehabilitación oral",
+      "web": "https://rannelucciodontologia.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Paraguay 2028, Piso 5, Oficina 23, Recoleta, CABA",
+      "instagram": null,
+      "facebook": null,
+      "whatsapp": "+54 9 11 2529-7595",
+      "score": 45,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Dentista En Recoleta | Rannelucci Odontología",
+        "meta_description": true,
+        "h1": true,
+        "open_graph": true,
+        "verificado": "Navegado directamente. Sin ningún link a Instagram o Facebook en la web."
+      },
+      "problemas": [
+        "Cero redes sociales enlazadas, pese a ser el consultorio de un Profesor Titular de la Facultad de Odontología UBA y Director del Hospital Odontológico UBA: esas credenciales no se muestran en ningún otro canal",
+        "Contenido escaso en la home (menos de 2500 caracteres de texto)",
+        "Sin galería de casos ni testimonios que respalden la trayectoria del profesional"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Miré la web del Dr. Rannelucci y me llamó la atención que, siendo el consultorio de un Profesor Titular UBA, no tenga ninguna red social enlazada ni contenido más allá de lo básico. Con esas credenciales hay mucho más para mostrar de lo que se ve hoy. Te cuento qué más encontré si querés, sin compromiso."
+    },
+    {
+      "id": 18,
+      "nombre": "Celedent",
+      "zona": "Recoleta",
+      "especialidad": "Odontología general, estética, rehabilitación oral, implantología",
+      "web": "https://www.celedent.com.ar/",
+      "telefono": "+54 9 11 3874-9345",
+      "email": "info@celedent.com.ar",
+      "direccion": "Córdoba 966, Piso 5, Depto E, CABA",
+      "instagram": "@celedent.ar",
+      "facebook": null,
+      "whatsapp": "+54 9 11 3874-9345",
+      "score": 35,
+      "nivel_digital": "medio",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Inicio | Celedent | Consultorio Odontológico en Recoleta | Blanqueamiento Dental & Limpieza Dental",
+        "meta_description": false,
+        "h1": true,
+        "open_graph": null,
+        "verificado": "Navegado directamente. Tiene reseñas de pacientes, presentación de la profesional y botón de WhatsApp visibles."
+      },
+      "problemas": [
+        "Sin meta description: en Google, la búsqueda 'consultorio odontológico en Recoleta' no muestra un resumen propio del sitio",
+        "El resto de la web está bastante bien resuelto (WhatsApp, reseñas, presentación profesional), por lo que es un ajuste puntual más que un rediseño completo",
+        "Sin blog ni contenido adicional que capture más búsquedas de tratamientos específicos"
+      ],
+      "mensaje_whatsapp": "Hola, soy Juan de Upcoded. Entré a la web de Celedent y noté que no tiene meta description: cuando alguien busca 'consultorio odontológico en Recoleta', Google no tiene un resumen armado para mostrar y termina completándolo con texto suelto de la página. Te cuento el resto si te interesa, gratis y sin compromiso."
+    },
+    {
+      "id": 19,
+      "nombre": "Zuro Dental",
+      "zona": "Recoleta",
+      "especialidad": "Clínica dental integral, +30 especialistas",
+      "web": "https://www.zurodental.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Marcelo T. de Alvear 2345 y Azcuénaga 1077, Recoleta, CABA",
+      "instagram": "https://instagram.com/zurodental",
+      "facebook": "https://www.facebook.com/zurodental",
+      "whatsapp": "+54 9 11 5135-8162",
+      "score": 14,
+      "nivel_digital": "alto",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Clínica dental en Recoleta, Buenos Aires — Zuro Dental",
+        "meta_description": true,
+        "h1": true,
+        "open_graph": true,
+        "tiempo_carga_s": 0.369,
+        "verificado": "Navegado directamente. Web rápida, con meta description clara, Open Graph completo, WhatsApp funcional y redes sociales bien enlazadas."
+      },
+      "problemas": [
+        "No contactar: web moderna, rápida (0,37s de carga) y bien resuelta en todos los aspectos técnicos revisados"
+      ],
+      "mensaje_whatsapp": null,
+      "no_contactar": true
+    },
+    {
+      "id": 20,
+      "nombre": "DOHO - Odontología y Ortodoncia",
+      "zona": "Belgrano",
+      "especialidad": "Implantes, ortodoncia, estética dental",
+      "web": "https://doho.com.ar/",
+      "telefono": null,
+      "email": null,
+      "direccion": "Virrey del Pino 4191, 3° C, Belgrano, CABA",
+      "instagram": "https://www.instagram.com/doho.odonto/",
+      "facebook": null,
+      "whatsapp": "+54 9 11 4165-7011",
+      "score": 12,
+      "nivel_digital": "alto",
+      "tecnico": {
+        "https": true,
+        "responsive": true,
+        "title": "Dentista en Belgrano | Implantes, Ortodoncia y Estética | DOHO",
+        "meta_description": true,
+        "h1": true,
+        "open_graph": true,
+        "tiempo_carga_s": 1.439,
+        "verificado": "Navegado directamente. Web rápida, meta description clara mencionando +307 reseñas 5 estrellas en Google, Open Graph completo, WhatsApp funcional."
+      },
+      "problemas": [
+        "No contactar: web moderna y bien resuelta, con buena meta description, Open Graph completo y WhatsApp funcional"
+      ],
+      "mensaje_whatsapp": null,
+      "no_contactar": true
+    }
+  ],
+  "estadisticas": {
+    "sin_web_propia": 3,
+    "sin_web_pct": 15,
+    "web_caida_o_inaccesible": 2,
+    "web_caida_pct": 10,
+    "sin_https": 1,
+    "sin_https_pct": 5,
+    "sin_h1_o_mal_usado": 6,
+    "sin_h1_pct": 30,
+    "sin_meta_description": 6,
+    "sin_meta_description_pct": 30,
+    "sin_open_graph": 6,
+    "sin_open_graph_pct": 30,
+    "sin_whatsapp_o_roto": 6,
+    "sin_whatsapp_pct": 30,
+    "no_contactar_web_moderna": 2,
+    "no_contactar_pct": 10,
+    "conclusion": "De 20 consultorios relevados en Belgrano, Núñez, Palermo, Colegiales y Recoleta, 18 (90%) tienen algún problema concreto de presencia digital que afecta directamente cuántos pacientes nuevos consiguen: 3 no tienen web propia, 2 tienen el dominio completamente caído, y el resto arrastra errores puntuales pero reales (SEO roto, botones de WhatsApp mal armados, redes que no llevan a ningún lado). Solo 2 (10%) tienen una web bien resuelta hoy."
+  }
+}
