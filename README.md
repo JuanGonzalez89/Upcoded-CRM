@@ -27,10 +27,6 @@ Abrí `http://localhost:3000`.
 
 Si ninguna fuente responde, la búsqueda se detiene: la app no fabrica negocios ni afirma que una empresa no tiene web. Cada resultado vence a las 24 horas si nadie lo guarda.
 
-## Resumen diario por email (opcional)
-
-Cargá en Vercel `CRON_SECRET`, `RESEND_API_KEY` y `DIGEST_FROM` (ver `.env.example`). Resend exige un dominio verificado para enviar a otras casillas. Sin esas variables, `/api/cron/digest` devuelve una vista previa sin enviar nada.
-
 ## Tests
 
 ```powershell
