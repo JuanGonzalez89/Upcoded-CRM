@@ -97,11 +97,26 @@ export function isTemporary(lead: Lead) {
   return TEMPORARY_STAGES.includes(lead.state);
 }
 
+// Sólo los hallazgos verificados de la auditoría se convierten en observaciones para el cliente;
+// las notas internas del buscador ("revisión manual", "no se localizó…") nunca llegan al mensaje.
+const OUTREACH_OBSERVATIONS: [RegExp, string][] = [
+  [/respondió con estado|No se pudo cargar/i, "la web no estaba cargando cuando la revisé"],
+  [/formulario ni canal|Contacto poco visible|Sin llamada a la acción/i, "no hay una forma rápida de consultar desde la web, como un formulario o WhatsApp"],
+  [/viewport|lento en móvil/i, "la web no se adapta bien al celular"],
+  [/Respuesta lenta/i, "la web tarda bastante en cargar"],
+  [/no usa HTTPS/i, "el sitio todavía no usa conexión segura (HTTPS)"],
+  [/Título SEO|Meta descripción/i, "el sitio no tiene título ni descripción claros para aparecer en Google"],
+];
+const FALLBACK_OBSERVATION = "hay margen para que las consultas les lleguen más fácil";
+
+export function outreachObservation(lead: Lead) {
+  return OUTREACH_OBSERVATIONS.find(([pattern]) => lead.signals.some((signal) => pattern.test(signal)))?.[1] ?? FALLBACK_OBSERVATION;
+}
+
 export function renderTemplate(template: string, lead: Lead, member: TeamMember | undefined, settings: Settings) {
-  const observation = (lead.signals.find((signal) => !signal.startsWith("Auditoría básica")) ?? "hay margen para que las consultas lleguen más fácil").replace(/\.$/, "");
   const values: Record<string, string> = {
     negocio: lead.name,
-    observacion: observation.charAt(0).toLocaleLowerCase("es-AR") + observation.slice(1),
+    observacion: outreachObservation(lead),
     zona: lead.locality || lead.province || "la zona",
     miembro: member?.name ?? "el equipo",
     firma: settings.signature,
@@ -109,12 +124,19 @@ export function renderTemplate(template: string, lead: Lead, member: TeamMember 
   return template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
 }
 
+/** Convierte un teléfono argentino al formato de WhatsApp: 549 + área + número, sin 0 ni 15. */
 export function whatsappUrl(phone: string, text: string) {
-  let digits = phone.replace(/\D/g, "");
-  if (!digits) return undefined;
+  let digits = phone.replace(/\D/g, "").replace(/^00/, "");
+  if (digits.length < 8) return undefined;
+  if (digits.startsWith("54")) digits = digits.slice(2);
+  if (digits.startsWith("9")) digits = digits.slice(1);
   if (digits.startsWith("0")) digits = digits.slice(1);
-  if (!digits.startsWith("54")) digits = `54${digits}`;
-  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
+  if (digits.length === 12) {
+    // Área de 2 a 4 dígitos seguida del prefijo móvil 15.
+    const split = [2, 3, 4].find((size) => digits.slice(size, size + 2) === "15");
+    if (split) digits = digits.slice(0, split) + digits.slice(split + 2);
+  }
+  return `https://wa.me/549${digits}?text=${encodeURIComponent(text)}`;
 }
 
 export function addDays(days: number, from = Date.now()) {

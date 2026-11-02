@@ -177,3 +177,10 @@ a.secondary-button{text-decoration:none}
 .drawer-head,.drawer-body{padding-left:16px;padding-right:16px}
 .composer-actions .primary-button{margin-left:0}
 }
+.mobile-nav{display:none}
+@media (max-width:760px){.mobile-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:15;background:#080c12;border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.mobile-nav button{position:relative;background:transparent;color:#8e9bb0;display:grid;justify-items:center;gap:3px;padding:6px 0;border-radius:8px;font-size:10px;font-weight:700}
+.mobile-nav button.active{color:#edf1f8;background:#14202b}
+.mobile-nav b{position:absolute;top:2px;left:calc(50% + 6px);background:#7b96e6;color:#0f1730;border-radius:10px;font:9px "DM Mono";padding:1px 5px}
+.workspace{padding-bottom:96px}
+}

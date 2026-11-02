@@ -216,6 +216,13 @@ export default function Home() {
         </div>
       </section>
 
+      <nav className="mobile-nav" aria-label="Navegación principal">
+        {nav.map(({ label, icon: Icon }) => {
+          const badge = label === "Inicio" ? myTicketCount : label === "Prospección" ? temporaryCount : 0;
+          return <button key={label} className={section === label ? "active" : ""} onClick={() => setSection(label)} aria-current={section === label ? "page" : undefined}><Icon size={19} />{badge > 0 && <b>{badge}</b>}<span>{label === "Configuración" ? "Ajustes" : label}</span></button>;
+        })}
+      </nav>
+
       {drawerLead && <ProspectDrawer {...panelProps} lead={drawerLead} onClose={() => setDrawerId(undefined)} />}
     </main>
   );
