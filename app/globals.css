@@ -198,3 +198,5 @@ a.secondary-button{text-decoration:none}
 .kanban-card span{display:flex;align-items:center;gap:8px;margin-top:4px}
 .kanban-card i{font-style:normal}
 .kanban-card span b{margin-left:auto;font:11px "DM Mono";color:#aab5c6}
+:root{color-scheme:dark}
+.kanban,.queue-list,.drawer-body{scrollbar-color:#263345 transparent}
