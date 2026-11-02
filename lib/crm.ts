@@ -205,10 +205,14 @@ export function relativeDue(value: string | undefined, now: number) {
   return `en ${days} d`;
 }
 
-export type TicketKind = "seguimiento" | "respondio" | "por_contactar" | "sin_asignar" | "reunion" | "por_vencer";
+export type TicketKind = "sin_respuesta" | "seguimiento" | "respondio" | "por_contactar" | "sin_asignar" | "reunion" | "por_vencer";
+
+/** Después de esta cantidad de mensajes sin respuesta se sugiere cerrar el prospecto como Perdido. */
+export const MAX_ATTEMPTS = 3;
 export type Ticket = { id: string; kind: TicketKind; lead: Lead; title: string; detail: string; due: string; priority: 1 | 2 | 3 };
 
 export const ticketLabel: Record<TicketKind, string> = {
+  sin_respuesta: "Sin respuesta",
   seguimiento: "Volver a contactar",
   respondio: "Respondió",
   por_contactar: "Por contactar",
@@ -225,6 +229,8 @@ export function buildTickets(leads: Lead[], me: string, scope: "mios" | "equipo"
     const followUp = lead.nextFollowUpAt ? Date.parse(lead.nextFollowUpAt) : undefined;
     if (lead.state === "respondio" && mine(lead)) {
       tickets.push({ id: `${lead.id}-r`, kind: "respondio", lead, priority: 1, title: "Respondió: falta contestarle", detail: lead.lastContactedAt ? `Último contacto ${formatDate(lead.lastContactedAt)}` : "Registrá la próxima acción", due: relativeDue(lead.nextFollowUpAt, now) || "ahora" });
+    } else if (lead.state === "contactado" && mine(lead) && lead.messages.length >= MAX_ATTEMPTS && followUp !== undefined && followUp <= now) {
+      tickets.push({ id: `${lead.id}-x`, kind: "sin_respuesta", lead, priority: 2, title: `${lead.messages.length} contactos sin respuesta`, detail: "Conviene cerrarlo como Perdido y liberar la cola", due: relativeDue(lead.nextFollowUpAt, now) });
     } else if (lead.state === "contactado" && mine(lead) && followUp !== undefined && followUp <= now + 12 * 60 * 60 * 1000) {
       tickets.push({ id: `${lead.id}-s`, kind: "seguimiento", lead, priority: followUp < now ? 1 : 2, title: "Sin respuesta: volver a contactar", detail: `Contactado ${formatDate(lead.lastContactedAt)} · ${lead.messages.length} mensaje${lead.messages.length === 1 ? "" : "s"}`, due: relativeDue(lead.nextFollowUpAt, now) });
     } else if (lead.state === "reunion" && mine(lead)) {

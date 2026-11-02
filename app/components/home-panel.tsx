@@ -1,9 +1,10 @@
-import { ArrowRight, CalendarClock, Check, Clock3, Inbox, MessageSquareReply, PhoneOutgoing, UserPlus, Users } from "lucide-react";
+import { ArrowRight, CircleOff, CalendarClock, Check, Clock3, Inbox, MessageSquareReply, PhoneOutgoing, UserPlus, Users } from "lucide-react";
 import { useMemo, useState } from "react";
 import { buildTickets, isTemporary, memberName, ticketLabel, type TicketKind } from "@/lib/crm";
 import { Avatar, type PanelProps, type Section } from "@/app/components/ui";
 
 const ticketIcon: Record<TicketKind, typeof Inbox> = {
+  sin_respuesta: CircleOff,
   seguimiento: CalendarClock, respondio: MessageSquareReply, por_contactar: PhoneOutgoing, sin_asignar: UserPlus, reunion: Users, por_vencer: Clock3,
 };
 
@@ -71,6 +72,7 @@ export function HomePanel({ leads, team, me, now, onOpen, onUpdate, onCompose, o
                 <span className="ticket-actions">
                   {ticket.kind === "sin_asignar" && <button className="secondary-button" onClick={() => onUpdate(ticket.lead.id, { assignedTo: me.email }, `${ticket.lead.name} quedó asignado a vos.`)}><UserPlus size={14} /> Tomarlo</button>}
                   {(ticket.kind === "por_contactar" || ticket.kind === "seguimiento") && <button className="primary-button" onClick={() => onCompose(ticket.lead.id)}><PhoneOutgoing size={14} /> {ticket.kind === "seguimiento" ? "Recontactar" : "Contactar"}</button>}
+                  {ticket.kind === "sin_respuesta" && <><button className="secondary-button" onClick={() => onCompose(ticket.lead.id)}><PhoneOutgoing size={14} /> Un intento más</button><button className="secondary-button" onClick={() => onUpdate(ticket.lead.id, { state: "perdido" }, `${ticket.lead.name} pasó a Perdido.`)}><CircleOff size={14} /> Pasar a Perdido</button></>}
                   {ticket.kind === "respondio" && <button className="secondary-button" onClick={() => onUpdate(ticket.lead.id, { state: "reunion" }, "Pasó a Reunión.")}><Check size={14} /> Agendé reunión</button>}
                   {ticket.kind === "por_vencer" && <button className="secondary-button" onClick={() => onUpdate(ticket.lead.id, { state: "guardado" }, "Guardado en el CRM.")}><Check size={14} /> Guardar</button>}
                 </span>

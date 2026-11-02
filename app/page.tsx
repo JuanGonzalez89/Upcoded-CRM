@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell, ChevronDown, ChevronRight, Check, KanbanSquare, LayoutDashboard, LogOut, MessageSquareText, PanelLeftClose, Radar, Settings2, ShieldCheck, Sparkles, UserRoundCog, X } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { ApiError, api, readLocal, writeLocal } from "@/lib/client-api";
 import { applyLocalPatch, buildTickets, DEFAULT_SETTINGS, DEFAULT_TEAM, describeSearch, isTemporary, type Lead, type LeadPatch, type SearchSummary, type Settings, type TeamMember } from "@/lib/crm";
@@ -50,6 +50,7 @@ export default function Home() {
   const [notice, setNotice] = useState("");
   const [now, setNow] = useState(Date.now());
   const [hydrated, setHydrated] = useState(false);
+  const lastMutationAt = useRef(0);
 
   const me = team.find((member) => member.email === meEmail) ?? team[0];
   const drawerLead = leads.find((lead) => lead.id === drawerId);
@@ -103,6 +104,25 @@ export default function Home() {
 
   useEffect(() => { if (hydrated && !isSupabaseConfigured) writeLocal(LOCAL_KEYS.leads, leads); }, [leads, hydrated]);
 
+  // Sincronización entre miembros: recarga al volver a la pestaña y cada minuto mientras está visible.
+  useEffect(() => {
+    if (!isSupabaseConfigured || !hydrated) return;
+    const refresh = async () => {
+      if (document.visibilityState !== "visible") return;
+      const startedAt = Date.now();
+      try {
+        const [{ prospects }, { settings: shared }] = await Promise.all([api<{ prospects: Lead[] }>("/api/prospects"), api<{ settings: Settings }>("/api/settings")]);
+        // Si hubo un cambio propio mientras la recarga viajaba, esta respuesta puede ser vieja.
+        if (lastMutationAt.current > startedAt) return;
+        setLeads(prospects);
+        setSettings(shared);
+      } catch { /* se reintenta en el próximo ciclo */ }
+    };
+    const interval = window.setInterval(refresh, 60_000);
+    document.addEventListener("visibilitychange", refresh);
+    return () => { window.clearInterval(interval); document.removeEventListener("visibilitychange", refresh); };
+  }, [hydrated]);
+
   const updateLead = useCallback(async (id: string, patch: LeadPatch, message?: string) => {
     if (!isSupabaseConfigured) {
       setLeads((current) => current.map((lead) => lead.id === id ? applyLocalPatch(lead, patch, meEmail, team, settings) : lead));
@@ -110,6 +130,7 @@ export default function Home() {
       return true;
     }
     try {
+      lastMutationAt.current = Date.now();
       const { prospect } = await api<{ prospect: Lead }>(`/api/prospects/${id}`, { method: "PATCH", body: patch });
       setLeads((current) => current.map((lead) => lead.id === id ? prospect : lead));
       if (message) setNotice(message);

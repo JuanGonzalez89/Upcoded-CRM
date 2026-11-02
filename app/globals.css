@@ -56,6 +56,7 @@ button,input,select{font:inherit}button{cursor:pointer;border:0}.sidebar{backgro
 .ticket.p1{background:#14130f}
 .ticket-icon{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:#14202b;color:#62d8cb}
 .ticket-icon.k-seguimiento,.ticket-icon.k-respondio{background:#3a3014;color:#ffd77a}
+.ticket-icon.k-sin_respuesta{background:#3a1d24;color:#ffb5bf}
 .ticket-icon.k-sin_asignar{background:#2a2140;color:#c9b6ff}
 .ticket-main{background:transparent;color:inherit;text-align:left;display:grid;gap:3px;min-width:0;padding:0}
 .ticket-main:hover strong{color:#62d8cb}

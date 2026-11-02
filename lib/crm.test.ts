@@ -130,3 +130,12 @@ describe("whatsappLinks", () => {
     assert.match(whatsappLinks("", "a").problem!, /Cargá un teléfono/);
   });
 });
+
+describe("sin respuesta", () => {
+  test("tras 3 contactos y con el seguimiento vencido sugiere cerrar como Perdido", () => {
+    const messages = [1, 2, 3].map((n) => ({ id: String(n), channel: "whatsapp", body: "x", actor: JI, at: new Date(now - n * 24 * HOUR).toISOString() }));
+    const overdue = new Date(now - HOUR).toISOString();
+    assert.equal(buildTickets([lead({ state: "contactado", assignedTo: JI, messages, nextFollowUpAt: overdue })], JI, "mios", now)[0].kind, "sin_respuesta");
+    assert.equal(buildTickets([lead({ state: "contactado", assignedTo: JI, messages: messages.slice(0, 2), nextFollowUpAt: overdue })], JI, "mios", now)[0].kind, "seguimiento");
+  });
+});
