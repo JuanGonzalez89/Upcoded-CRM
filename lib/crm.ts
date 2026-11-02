@@ -47,6 +47,20 @@ export type LeadPatch = {
 };
 
 export type Templates = Record<Channel | "seguimiento", string>;
+export type DuplicateMatch = { name: string; assignedTo: string | null; state: string };
+export type SearchSummary = { mapa: number; web: number; mapAvailable: boolean; editorialDiscarded: number; duplicates: DuplicateMatch[] };
+
+/** Resumen legible de una búsqueda: de dónde salió cada prospecto y qué se salteó porque ya lo lleva alguien. */
+export function describeSearch(found: number, province: string, summary: SearchSummary, team: TeamMember[]) {
+  const parts = [found ? `${found} oportunidades nuevas en ${province} (${summary.mapa} del mapa, ${summary.web} de la web).` : `No hubo negocios nuevos en ${province}.`];
+  if (summary.duplicates.length) {
+    const byOwner = summary.duplicates.reduce<Record<string, number>>((acc, item) => { const owner = item.assignedTo ? memberName(team, item.assignedTo) : "sin responsable"; acc[owner] = (acc[owner] ?? 0) + 1; return acc; }, {});
+    parts.push(`${summary.duplicates.length} ya estaban en el CRM (${Object.entries(byOwner).map(([owner, count]) => `${count} de ${owner}`).join(", ")}).`);
+  }
+  if (summary.editorialDiscarded) parts.push(`Se descartaron ${summary.editorialDiscarded} notas o rankings que no son negocios.`);
+  if (!summary.mapAvailable) parts.push("El mapa no devolvió resultados para este rubro: se usó sólo la búsqueda web.");
+  return parts.join(" ");
+}
 export type Settings = { followUpDays: number; signature: string; templates: Templates };
 
 export const TEMPORARY_STAGES: Stage[] = ["nuevo", "revisar", "descartado"];

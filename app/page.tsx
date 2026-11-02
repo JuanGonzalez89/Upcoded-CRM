@@ -4,7 +4,7 @@ import { Bell, ChevronDown, ChevronRight, Check, KanbanSquare, LayoutDashboard, 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { ApiError, api, readLocal, writeLocal } from "@/lib/client-api";
-import { applyLocalPatch, buildTickets, DEFAULT_SETTINGS, DEFAULT_TEAM, isTemporary, type Lead, type LeadPatch, type Settings, type TeamMember } from "@/lib/crm";
+import { applyLocalPatch, buildTickets, DEFAULT_SETTINGS, DEFAULT_TEAM, describeSearch, isTemporary, type Lead, type LeadPatch, type SearchSummary, type Settings, type TeamMember } from "@/lib/crm";
 import { getSupabaseBrowserClient, isSupabaseConfigured } from "@/lib/supabase-browser";
 import { Avatar, type Section } from "@/app/components/ui";
 import { HomePanel } from "@/app/components/home-panel";
@@ -123,11 +123,11 @@ export default function Home() {
   async function launchSearch(form: SearchForm) {
     setNotice("Consultando la fuente configurada y preparando evidencia verificable…");
     try {
-      const result = await api<{ status?: string; message?: string; candidates?: Lead[] }>("/api/prospecting", { method: "POST", body: form });
+      const result = await api<{ status?: string; message?: string; candidates?: Lead[] } & Partial<SearchSummary>>("/api/prospecting", { method: "POST", body: form });
       if (result.status === "configuration_required") { setNotice(result.message ?? "Falta configurar la fuente de búsqueda."); return []; }
       const candidates = result.candidates ?? [];
       setLeads((current) => [...candidates, ...current]);
-      setNotice(candidates.length ? `${candidates.length} oportunidades ingresaron a la bandeja temporal de ${form.province}.` : "No hubo coincidencias seguras. Probá otra provincia o rubro.");
+      setNotice(describeSearch(candidates.length, form.province, { mapa: result.mapa ?? 0, web: result.web ?? candidates.length, mapAvailable: result.mapAvailable ?? false, editorialDiscarded: result.editorialDiscarded ?? 0, duplicates: result.duplicates ?? [] }, team));
       return candidates;
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "No se pudo consultar la fuente.");
