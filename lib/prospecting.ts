@@ -69,11 +69,6 @@ export function isLikelyDuplicate(a: { name: string; location: string }, b: { na
   return normalize(a.name) === normalize(b.name) && normalize(a.location) === normalize(b.location);
 }
 
-export function draftUpcodedMessage(name: string, signal: string) {
-  const business = cleanBusinessName(name);
-  return `Hola, ¿cómo estás? Estuve viendo ${business} y me llamó la atención ${signal.toLocaleLowerCase("es-AR")}. En UpCoded diseñamos sitios rápidos y claros para que los negocios conviertan mejor las consultas. Si te sirve, te puedo compartir tres mejoras puntuales, sin compromiso.`;
-}
-
 export async function inspectWebsite(url?: string): Promise<WebsiteInspection> {
   const websiteUrl = normalizeUrl(url);
   if (!websiteUrl) return { signals: ["No se pudo validar la URL"], evidence: [], scoreDelta: 0, confidenceDelta: -8 };

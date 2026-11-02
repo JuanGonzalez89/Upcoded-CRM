@@ -1,8 +1,10 @@
 import { createClient, type SupabaseClient, type User } from "@supabase/supabase-js";
+import type { TeamMember } from "@/lib/crm";
 
-export type AuthenticatedContext = { supabase: SupabaseClient; user: User };
+export type AuthenticatedContext = { supabase: SupabaseClient; user: User; member: TeamMember };
 
-export async function requireUpcodedAdmin(request: Request): Promise<AuthenticatedContext | null> {
+/** Valida el token y exige que el email figure en public.team_members (única lista de acceso). */
+export async function requireTeamMember(request: Request): Promise<AuthenticatedContext | null> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
@@ -10,7 +12,9 @@ export async function requireUpcodedAdmin(request: Request): Promise<Authenticat
 
   const supabase = createClient(url, key, { global: { headers: { Authorization: `Bearer ${token}` } } });
   const { data: { user } } = await supabase.auth.getUser(token);
-  const adminEmail = (process.env.UPCODED_ADMIN_EMAIL ?? "upcodednow@gmail.com").toLowerCase();
-  if (!user || user.email?.toLowerCase() !== adminEmail) return null;
-  return { supabase, user };
+  const email = user?.email?.toLowerCase();
+  if (!user || !email) return null;
+  const { data } = await supabase.from("team_members").select("email, display_name, initials").eq("email", email).maybeSingle();
+  if (!data) return null;
+  return { supabase, user, member: { email: data.email, name: data.display_name, initials: data.initials } };
 }
