@@ -1,7 +1,7 @@
-import { Building2, ClipboardList, Download, Search } from "lucide-react";
+import { Building2, ClipboardList, Columns3, Download, Rows3, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { formatDate, PIPELINE_STAGES, relativeDue, stageLabel, type Lead, type Stage } from "@/lib/crm";
-import { AssigneeSelect, StageBadge, type PanelProps } from "@/app/components/ui";
+import { AssigneeSelect, Avatar, StageBadge, type PanelProps } from "@/app/components/ui";
 
 type OwnerFilter = "mios" | "todos" | "sin_asignar" | string;
 
@@ -10,16 +10,23 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
   const [stage, setStage] = useState<Stage | "activos" | "todas">("activos");
   const [province, setProvince] = useState("todas");
   const [query, setQuery] = useState("");
+  const [view, setView] = useState<"tabla" | "tablero">("tabla");
+  const [dragOver, setDragOver] = useState<Stage>();
 
   const pipeline = useMemo(() => leads.filter((lead) => PIPELINE_STAGES.includes(lead.state)), [leads]);
   const byOwner = pipeline.filter((lead) => owner === "todos" ? true : owner === "mios" ? lead.assignedTo === me.email : owner === "sin_asignar" ? !lead.assignedTo : lead.assignedTo === owner);
   const stageCount = (value: Stage) => byOwner.filter((lead) => lead.state === value).length;
   const provinces = [...new Set(pipeline.map((lead) => lead.province || "Sin provincia"))].sort((a, b) => a.localeCompare(b, "es"));
-  const rows = byOwner
-    .filter((lead) => stage === "todas" ? true : stage === "activos" ? !["cliente", "perdido", "no_contactar"].includes(lead.state) : lead.state === stage)
+  const scoped = byOwner
     .filter((lead) => province === "todas" || (lead.province || "Sin provincia") === province)
     .filter((lead) => !query || `${lead.name} ${lead.category} ${lead.location}`.toLowerCase().includes(query.toLowerCase()))
     .sort((a, b) => (a.nextFollowUpAt ?? "9").localeCompare(b.nextFollowUpAt ?? "9") || b.score - a.score);
+  const rows = view === "tablero" ? scoped : scoped.filter((lead) => stage === "todas" ? true : stage === "activos" ? !["cliente", "perdido", "no_contactar"].includes(lead.state) : lead.state === stage);
+
+  function moveTo(id: string, target: Stage) {
+    const lead = leads.find((item) => item.id === id);
+    if (lead && lead.state !== target) onUpdate(id, { state: target }, `${lead.name}: ${stageLabel[target]}.`);
+  }
 
   function exportCsv() {
     const header = ["nombre", "rubro", "provincia", "localidad", "etapa", "responsable", "telefono", "email", "web", "instagram", "ultimo_contacto", "proximo_seguimiento", "oportunidad", "notas"];
@@ -32,7 +39,14 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
   }
 
   return <>
-    <div className="page-heading"><div><h1>CRM del equipo.</h1><p className="lede">Cada prospecto tiene un responsable. Filtrá por miembro para ver sólo tu cartera y hacé click en una fila para abrir la ficha completa.</p></div><button className="secondary-button" onClick={exportCsv} disabled={!rows.length}><Download size={15} /> Exportar CSV</button></div>
+    <div className="page-heading"><div><h1>CRM del equipo.</h1><p className="lede">Cada prospecto tiene un responsable. Filtrá por miembro para ver sólo tu cartera y hacé click en un prospecto para abrir la ficha completa. En el tablero, arrastralo para cambiarlo de etapa.</p></div>
+      <div className="result-actions">
+        <div className="segmented small" role="tablist" aria-label="Vista">
+          <button role="tab" aria-selected={view === "tabla"} className={view === "tabla" ? "active" : ""} onClick={() => setView("tabla")}><Rows3 size={14} /> Tabla</button>
+          <button role="tab" aria-selected={view === "tablero"} className={view === "tablero" ? "active" : ""} onClick={() => setView("tablero")}><Columns3 size={14} /> Tablero</button>
+        </div>
+        <button className="secondary-button" onClick={exportCsv} disabled={!rows.length}><Download size={15} /> Exportar CSV</button>
+      </div></div>
 
     <div className="crm-toolbar">
       <div className="segmented" role="tablist" aria-label="Responsable">
@@ -44,6 +58,24 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
       </div>
     </div>
 
+    {view === "tablero" ? <div className="kanban" aria-label="Tablero por etapa">
+      {PIPELINE_STAGES.map((column) => {
+        const cards = scoped.filter((lead) => lead.state === column);
+        return <section key={column} className={dragOver === column ? "kanban-column over" : "kanban-column"} aria-label={stageLabel[column]}
+          onDragOver={(event) => { event.preventDefault(); setDragOver(column); }} onDragLeave={() => setDragOver(undefined)}
+          onDrop={(event) => { event.preventDefault(); setDragOver(undefined); moveTo(event.dataTransfer.getData("text/plain"), column); }}>
+          <header><StageBadge stage={column} /><b>{cards.length}</b></header>
+          {cards.map((lead) => {
+            const overdue = lead.nextFollowUpAt && Date.parse(lead.nextFollowUpAt) < now && ["contactado", "respondio", "reunion"].includes(lead.state);
+            return <button key={lead.id} className="kanban-card" draggable onDragStart={(event) => event.dataTransfer.setData("text/plain", lead.id)} onClick={() => onOpen(lead.id)}>
+              <strong>{lead.name}</strong>
+              <small>{lead.category} · {lead.province || lead.location}</small>
+              <span><Avatar member={team.find((member) => member.email === lead.assignedTo)} size="sm" /><i className={overdue ? "cell-due overdue" : "cell-due"}>{lead.nextFollowUpAt ? relativeDue(lead.nextFollowUpAt, now) : ""}</i><b>{lead.score}</b></span>
+            </button>;
+          })}
+        </section>;
+      })}
+    </div> : <>
     <div className="chip-row" role="tablist" aria-label="Etapa">
       <button role="tab" aria-selected={stage === "activos"} className={stage === "activos" ? "chip active" : "chip"} onClick={() => setStage("activos")}>Activos <b>{byOwner.filter((lead) => !["cliente", "perdido", "no_contactar"].includes(lead.state)).length}</b></button>
       {PIPELINE_STAGES.map((value) => <button key={value} role="tab" aria-selected={stage === value} className={stage === value ? "chip active" : "chip"} onClick={() => setStage(value)}>{stageLabel[value]} <b>{stageCount(value)}</b></button>)}
@@ -64,5 +96,6 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
         </div>;
       }) : <div className="operation-empty"><ClipboardList size={24} /><strong>No hay prospectos con estos filtros.</strong><span>Guardá oportunidades desde la bandeja de Prospección o cambiá el filtro de responsable.</span></div>}
     </div>
+    </>}
   </>;
 }
