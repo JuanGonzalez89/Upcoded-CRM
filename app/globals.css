@@ -185,18 +185,22 @@ a.secondary-button{text-decoration:none}
 .mobile-nav b{position:absolute;top:2px;left:calc(50% + 6px);background:#7b96e6;color:#0f1730;border-radius:10px;font:9px "DM Mono";padding:1px 5px}
 .workspace{padding-bottom:96px}
 }
-.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:10px;overflow-x:auto;padding-bottom:8px;align-items:start}
+.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(132px,1fr);gap:8px;overflow-x:auto;padding-bottom:8px;align-items:start}
 .kanban-column{background:#0d131c;border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;gap:8px;min-height:160px;align-content:start;transition:border-color .15s ease,background .15s ease}
 .kanban-column.over{border-color:#1e716a;background:#0f1f22}
 .kanban-column header{display:flex;justify-content:space-between;align-items:center;padding:2px 2px 4px}
 .kanban-column header b{font:10px "DM Mono";color:#8e9bb0}
-.kanban-card{background:#101720;border:1px solid #223043;border-radius:8px;padding:10px;text-align:left;color:inherit;display:grid;gap:4px;cursor:grab}
+.kanban-card{background:#101720;border:1px solid #223043;border-radius:8px;padding:10px;text-align:left;color:inherit;display:grid;gap:4px;cursor:grab;touch-action:pan-y;user-select:none;min-width:0}
+.kanban-card strong,.kanban-card small{overflow-wrap:anywhere}
+.kanban.dragging,.kanban.dragging *{cursor:grabbing}
+.kanban-card.placeholder{opacity:.35;border-style:dashed}
+.kanban-card.ghost{position:fixed;z-index:30;pointer-events:none;box-shadow:0 14px 32px rgba(0,0,0,.45);border-color:#1e716a;transform:rotate(1.5deg)}
 .kanban-card:hover{border-color:#3c526d}
 .kanban-card:focus-visible{outline:2px solid #78e6db;outline-offset:1px}
 .kanban-card strong{font-size:12px}
 .kanban-card small{font-size:10px;color:#8e9bb0}
-.kanban-card span{display:flex;align-items:center;gap:8px;margin-top:4px}
+.kanban-card>span{display:flex;align-items:center;gap:8px;margin-top:4px}
 .kanban-card i{font-style:normal}
-.kanban-card span b{margin-left:auto;font:11px "DM Mono";color:#aab5c6}
+.kanban-card>span b{margin-left:auto;font:11px "DM Mono";color:#aab5c6}
 :root{color-scheme:dark}
 .kanban,.queue-list,.drawer-body{scrollbar-color:#263345 transparent}

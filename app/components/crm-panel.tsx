@@ -1,7 +1,8 @@
 import { Building2, ClipboardList, Columns3, Download, Rows3, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { formatDate, PIPELINE_STAGES, relativeDue, stageLabel, type Lead, type Stage } from "@/lib/crm";
-import { AssigneeSelect, Avatar, StageBadge, type PanelProps } from "@/app/components/ui";
+import { AssigneeSelect, StageBadge, type PanelProps } from "@/app/components/ui";
+import { KanbanBoard } from "@/app/components/kanban-board";
 
 type OwnerFilter = "mios" | "todos" | "sin_asignar" | string;
 
@@ -11,7 +12,6 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
   const [province, setProvince] = useState("todas");
   const [query, setQuery] = useState("");
   const [view, setView] = useState<"tabla" | "tablero">("tabla");
-  const [dragOver, setDragOver] = useState<Stage>();
 
   const pipeline = useMemo(() => leads.filter((lead) => PIPELINE_STAGES.includes(lead.state)), [leads]);
   const byOwner = pipeline.filter((lead) => owner === "todos" ? true : owner === "mios" ? lead.assignedTo === me.email : owner === "sin_asignar" ? !lead.assignedTo : lead.assignedTo === owner);
@@ -58,24 +58,7 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
       </div>
     </div>
 
-    {view === "tablero" ? <div className="kanban" aria-label="Tablero por etapa">
-      {PIPELINE_STAGES.map((column) => {
-        const cards = scoped.filter((lead) => lead.state === column);
-        return <section key={column} className={dragOver === column ? "kanban-column over" : "kanban-column"} aria-label={stageLabel[column]}
-          onDragOver={(event) => { event.preventDefault(); setDragOver(column); }} onDragLeave={() => setDragOver(undefined)}
-          onDrop={(event) => { event.preventDefault(); setDragOver(undefined); moveTo(event.dataTransfer.getData("text/plain"), column); }}>
-          <header><StageBadge stage={column} /><b>{cards.length}</b></header>
-          {cards.map((lead) => {
-            const overdue = lead.nextFollowUpAt && Date.parse(lead.nextFollowUpAt) < now && ["contactado", "respondio", "reunion"].includes(lead.state);
-            return <button key={lead.id} className="kanban-card" draggable onDragStart={(event) => event.dataTransfer.setData("text/plain", lead.id)} onClick={() => onOpen(lead.id)}>
-              <strong>{lead.name}</strong>
-              <small>{lead.category} · {lead.province || lead.location}</small>
-              <span><Avatar member={team.find((member) => member.email === lead.assignedTo)} size="sm" /><i className={overdue ? "cell-due overdue" : "cell-due"}>{lead.nextFollowUpAt ? relativeDue(lead.nextFollowUpAt, now) : ""}</i><b>{lead.score}</b></span>
-            </button>;
-          })}
-        </section>;
-      })}
-    </div> : <>
+    {view === "tablero" ? <KanbanBoard leads={scoped} team={team} now={now} onOpen={onOpen} onMove={moveTo} /> : <>
     <div className="chip-row" role="tablist" aria-label="Etapa">
       <button role="tab" aria-selected={stage === "activos"} className={stage === "activos" ? "chip active" : "chip"} onClick={() => setStage("activos")}>Activos <b>{byOwner.filter((lead) => !["cliente", "perdido", "no_contactar"].includes(lead.state)).length}</b></button>
       {PIPELINE_STAGES.map((value) => <button key={value} role="tab" aria-selected={stage === value} className={stage === value ? "chip active" : "chip"} onClick={() => setStage(value)}>{stageLabel[value]} <b>{stageCount(value)}</b></button>)}
