@@ -100,10 +100,11 @@ export function isTemporary(lead: Lead) {
 // Sólo los hallazgos verificados de la auditoría se convierten en observaciones para el cliente;
 // las notas internas del buscador ("revisión manual", "no se localizó…") nunca llegan al mensaje.
 const OUTREACH_OBSERVATIONS: [RegExp, string][] = [
-  [/respondió con estado|No se pudo cargar/i, "la web no estaba cargando cuando la revisé"],
+  // Sólo errores que un visitante también vería; un 403/429 suele ser bloqueo al bot de auditoría.
+  [/respondió con estado (404|410|5\d\d)\b/i, "la web está dando error al abrirla"],
   [/formulario ni canal|Contacto poco visible|Sin llamada a la acción/i, "no hay una forma rápida de consultar desde la web, como un formulario o WhatsApp"],
-  [/viewport|lento en móvil/i, "la web no se adapta bien al celular"],
-  [/Respuesta lenta/i, "la web tarda bastante en cargar"],
+  [/viewport/i, "la web no se adapta bien al celular"],
+  [/Respuesta lenta|lento en móvil/i, "la web tarda bastante en cargar"],
   [/no usa HTTPS/i, "el sitio todavía no usa conexión segura (HTTPS)"],
   [/Título SEO|Meta descripción/i, "el sitio no tiene título ni descripción claros para aparecer en Google"],
 ];
@@ -124,19 +125,40 @@ export function renderTemplate(template: string, lead: Lead, member: TeamMember 
   return template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
 }
 
-/** Convierte un teléfono argentino al formato de WhatsApp: 549 + área + número, sin 0 ni 15. */
-export function whatsappUrl(phone: string, text: string) {
-  let digits = phone.replace(/\D/g, "").replace(/^00/, "");
-  if (digits.length < 8) return undefined;
-  if (digits.startsWith("54")) digits = digits.slice(2);
-  if (digits.startsWith("9")) digits = digits.slice(1);
+export type WhatsappLink = { label: string; url: string };
+
+/**
+ * Links de WhatsApp para un teléfono. En Argentina los celulares van como 549 + área + número
+ * (sin 0 ni 15) y los fijos de WhatsApp Business como 54 + área + número. Si no se puede saber
+ * cuál es, se ofrecen los dos. Devuelve un problema legible cuando el número no sirve.
+ */
+export function whatsappLinks(phone: string, text: string): { links: WhatsappLink[]; problem?: string } {
+  const raw = phone.trim();
+  if (!raw) return { links: [], problem: "Cargá un teléfono en la ficha para abrir WhatsApp." };
+  if (/[/,;]|\b(int|interno|ext)\b/i.test(raw)) return { links: [], problem: "El teléfono tiene más de un número o un interno: dejá uno solo en la ficha." };
+  const link = (number: string) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+  let digits = raw.replace(/\D/g, "");
+  const international = raw.startsWith("+") || digits.startsWith("00");
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (international && !digits.startsWith("54")) {
+    return digits.length >= 8 && digits.length <= 15 ? { links: [{ label: "WhatsApp", url: link(digits) }] } : { links: [], problem: "El número internacional parece incompleto." };
+  }
+  let mobile = false;
+  if (digits.startsWith("54")) {
+    digits = digits.slice(2);
+    if (digits.startsWith("9")) { mobile = true; digits = digits.slice(1); }
+  }
   if (digits.startsWith("0")) digits = digits.slice(1);
+  if (/^(800|810|600)/.test(digits)) return { links: [], problem: "Es un número 0800/0810: no tiene WhatsApp." };
   if (digits.length === 12) {
     // Área de 2 a 4 dígitos seguida del prefijo móvil 15.
     const split = [2, 3, 4].find((size) => digits.slice(size, size + 2) === "15");
-    if (split) digits = digits.slice(0, split) + digits.slice(split + 2);
+    if (split) { mobile = true; digits = digits.slice(0, split) + digits.slice(split + 2); }
   }
-  return `https://wa.me/549${digits}?text=${encodeURIComponent(text)}`;
+  // Las áreas argentinas empiezan con 11, 2 o 3 y el número nacional tiene 10 dígitos.
+  if (digits.length !== 10 || !/^(11|2|3)/.test(digits)) return { links: [], problem: "Al teléfono le falta el código de área o tiene dígitos de más: revisalo en la ficha." };
+  if (mobile) return { links: [{ label: "WhatsApp", url: link(`549${digits}`) }] };
+  return { links: [{ label: "WhatsApp (celular)", url: link(`549${digits}`) }, { label: "WhatsApp (fijo)", url: link(`54${digits}`) }] };
 }
 
 export function addDays(days: number, from = Date.now()) {

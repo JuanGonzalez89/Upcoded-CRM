@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "start": "next start"
+    "start": "next start",
+    "test": "node --test \"lib/**/*.test.ts\""
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",

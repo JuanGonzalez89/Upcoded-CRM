@@ -86,6 +86,11 @@ export async function inspectWebsite(url?: string): Promise<WebsiteInspection> {
     const evidence: ProspectEvidence[] = [{ kind: "website", label: `Sitio accesible (${response.status}) · ${responseMs} ms`, url: websiteUrl }];
     let scoreDelta = 0;
     let confidenceDelta = 18;
+    // 401/403/429/503 suelen ser protección anti-bots contra la auditoría, no una web caída;
+    // el HTML recibido es la página de bloqueo, así que no se audita.
+    if ([401, 403, 429, 503].includes(response.status)) {
+      return { websiteUrl, responseMs, signals: [`El sitio bloqueó la auditoría automática (estado ${response.status}): revisar a mano`], evidence, scoreDelta: 0, confidenceDelta: 4 };
+    }
     const instagram = html.match(/https?:\/\/(?:www\.)?instagram\.com\/[^"'\s<>?#]+/i)?.[0];
     if (!response.ok) { signals.push(`El sitio respondió con estado ${response.status}`); scoreDelta += 22; confidenceDelta += 8; }
     if (!/name=["']viewport["']/i.test(html)) { signals.push("No se detectó etiqueta viewport para móvil"); scoreDelta += 16; }
@@ -93,7 +98,8 @@ export async function inspectWebsite(url?: string): Promise<WebsiteInspection> {
     if (!/name=["']description["']/i.test(html)) { signals.push("Meta descripción no detectada"); scoreDelta += 8; }
     if (!/<form\b|mailto:|wa\.me|api\.whatsapp\.com/i.test(lower)) { signals.push("No se detectó formulario ni canal de contacto directo"); scoreDelta += 14; }
     if (responseMs > 3500) { signals.push(`Respuesta lenta: ${Math.round(responseMs / 100) / 10} s`); scoreDelta += 12; }
-    if (websiteUrl.startsWith("http:")) { signals.push("El sitio no usa HTTPS"); scoreDelta += 18; }
+    // Se evalúa la URL final: un http:// que redirige a https:// sí usa HTTPS.
+    if ((response.url || websiteUrl).startsWith("http:")) { signals.push("El sitio no usa HTTPS"); scoreDelta += 18; }
     if (instagram) evidence.push({ kind: "social", label: "El sitio enlaza a un perfil de Instagram", url: normalizeUrl(instagram) });
     if (!signals.length) signals.push("Auditoría básica: no se encontraron fricciones técnicas claras");
     return { websiteUrl, instagramUrl: normalizeUrl(instagram), responseMs, signals, evidence, scoreDelta, confidenceDelta };

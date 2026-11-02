@@ -1,6 +1,6 @@
 import { AlertTriangle, AtSign, Check, Copy, ExternalLink, Instagram, MessageCircle, Send } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { channelLabel, formatDateTime, memberName, PIPELINE_STAGES, relativeDue, renderTemplate, whatsappUrl, type Channel, type Lead } from "@/lib/crm";
+import { channelLabel, formatDateTime, memberName, PIPELINE_STAGES, relativeDue, renderTemplate, whatsappLinks, type Channel, type Lead, type WhatsappLink } from "@/lib/crm";
 import { Avatar, StageBadge, type PanelProps } from "@/app/components/ui";
 
 const channelIcon: Record<Channel, typeof MessageCircle> = { whatsapp: MessageCircle, email: AtSign, instagram: Instagram };
@@ -29,10 +29,12 @@ export function MessagesPanel({ leads, team, me, now, settings, onOpen, onUpdate
 
   const history = useMemo(() => leads.flatMap((lead) => lead.messages.map((message) => ({ ...message, lead }))).filter((item) => historyOwner === "todos" || item.actor === historyOwner).sort((a, b) => b.at.localeCompare(a.at)).slice(0, 40), [leads, historyOwner]);
 
-  const channelLink = selected ? (channel === "whatsapp" ? whatsappUrl(selected.phone, body)
-    : channel === "email" && selected.email ? `mailto:${selected.email}?subject=${encodeURIComponent(`${selected.name} · Upcoded`)}&body=${encodeURIComponent(body)}`
-    : channel === "instagram" ? selected.instagramUrl : undefined) : undefined;
-  const missingChannel = channel === "whatsapp" ? "Cargá un teléfono en la ficha para abrir WhatsApp." : channel === "email" ? "Cargá un email en la ficha para abrir el correo." : "No hay Instagram verificado para este prospecto.";
+  const whatsapp = selected && channel === "whatsapp" ? whatsappLinks(selected.phone, body) : undefined;
+  const channelLinks: WhatsappLink[] = !selected ? []
+    : whatsapp ? whatsapp.links
+    : channel === "email" ? (selected.email ? [{ label: "Abrir email", url: `mailto:${selected.email}?subject=${encodeURIComponent(`${selected.name} · Upcoded`)}&body=${encodeURIComponent(body)}` }] : [])
+    : selected.instagramUrl ? [{ label: "Abrir Instagram", url: selected.instagramUrl }] : [];
+  const missingChannel = whatsapp?.problem ?? (channel === "email" ? "Cargá un email en la ficha para abrir el correo." : "No hay Instagram verificado para este prospecto.");
 
   async function register() {
     if (!selected || !body.trim()) return;
@@ -73,7 +75,7 @@ export function MessagesPanel({ leads, team, me, now, settings, onOpen, onUpdate
           </label>
           <div className="composer-actions">
             <button className="secondary-button" onClick={() => navigator.clipboard?.writeText(body)}><Copy size={15} /> Copiar</button>
-            {channelLink ? <a className="secondary-button" href={channelLink} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Abrir {channelLabel[channel]}</a> : <span className="cell-muted">{missingChannel}</span>}
+            {channelLinks.length ? channelLinks.map((item) => <a key={item.url} className="secondary-button" href={item.url} target="_blank" rel="noreferrer"><ExternalLink size={15} /> {item.label.startsWith("WhatsApp") ? `Abrir ${item.label}` : item.label}</a>) : <span className="cell-muted">{missingChannel}</span>}
             <button className="primary-button" onClick={register} disabled={sending || !body.trim()}><Send size={15} /> {sending ? "Registrando…" : "Registrar envío"}</button>
           </div>
           <small className="expiry">Al registrar: pasa a Contactado, queda a nombre de {me.name} y se programa el seguimiento en {settings.followUpDays} días. Nada se envía automáticamente.</small>

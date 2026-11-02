@@ -1,4 +1,4 @@
-import { CheckCircle2, CircleAlert, Database, Download, Radar, RotateCcw, Save, Users } from "lucide-react";
+import { CheckCircle2, CircleAlert, Database, Download, LogOut, Radar, RotateCcw, Save, UserRoundCog, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { channelLabel, DEFAULT_SETTINGS, isTemporary, type Settings, type Templates } from "@/lib/crm";
 import { Avatar, type PanelProps } from "@/app/components/ui";
@@ -7,7 +7,7 @@ export type Services = { supabase: boolean; tavily: boolean };
 
 const templateLabel: Record<keyof Templates, string> = { ...channelLabel, seguimiento: "Seguimiento (sin respuesta)" };
 
-export function SettingsPanel({ leads, team, me, settings, services, onSaveSettings, onSaveProfile }: PanelProps & { services: Services; onSaveSettings: (settings: Settings) => Promise<void>; onSaveProfile: (name: string, initials: string) => Promise<void> }) {
+export function SettingsPanel({ leads, team, me, settings, services, onSaveSettings, onSaveProfile, onSwitchAccount, canSwitchLocally }: PanelProps & { services: Services; onSaveSettings: (settings: Settings) => Promise<void>; onSaveProfile: (name: string, initials: string) => Promise<void>; onSwitchAccount: (email?: string) => Promise<void>; canSwitchLocally: boolean }) {
   const [name, setName] = useState(me.name);
   const [initials, setInitials] = useState(me.initials);
   const [draft, setDraft] = useState<Settings>(settings);
@@ -38,6 +38,12 @@ export function SettingsPanel({ leads, team, me, settings, services, onSaveSetti
           <label className="wide">Email<input value={me.email} disabled /></label>
           <button className="primary-button" type="submit" disabled={name.trim() === me.name && initials.trim() === me.initials}><Save size={15} /> Guardar perfil</button>
         </form>
+        {/* En el celular la barra lateral no se ve: la sesión también se maneja desde acá. */}
+        <div className="settings-actions">
+          {canSwitchLocally
+            ? team.filter((member) => member.email !== me.email).map((member) => <button key={member.email} className="secondary-button" type="button" onClick={() => onSwitchAccount(member.email)}><UserRoundCog size={15} /> Operar como {member.name}</button>)
+            : <button className="secondary-button" type="button" onClick={() => onSwitchAccount()}><LogOut size={15} /> Cerrar sesión</button>}
+        </div>
       </section>
 
       <section className="settings-card">

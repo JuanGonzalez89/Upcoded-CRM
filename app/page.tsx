@@ -55,6 +55,7 @@ export default function Home() {
   const drawerLead = leads.find((lead) => lead.id === drawerId);
   const myTicketCount = useMemo(() => buildTickets(leads, meEmail, "mios", now).length, [leads, meEmail, now]);
   const temporaryCount = leads.filter((lead) => isTemporary(lead) && lead.state !== "descartado").length;
+  const badgeFor = (label: Section) => label === "Inicio" ? myTicketCount : label === "Prospección" ? temporaryCount : 0;
 
   useEffect(() => {
     if (!isSupabaseConfigured) {
@@ -181,7 +182,7 @@ export default function Home() {
         </div>
         <nav aria-label="Navegación principal">
           {nav.map(({ label, icon: Icon }) => {
-            const badge = label === "Inicio" ? myTicketCount : label === "Prospección" ? temporaryCount : 0;
+            const badge = badgeFor(label);
             return <button key={label} className={section === label ? "nav-item active" : "nav-item"} onClick={() => setSection(label)}><Icon size={18} /><span>{label}</span>{badge > 0 && <b>{badge}</b>}</button>;
           })}
         </nav>
@@ -212,13 +213,13 @@ export default function Home() {
             : section === "Prospección" ? <ProspectingPanel {...panelProps} onSearch={launchSearch} />
             : section === "CRM" ? <CrmPanel {...panelProps} />
             : section === "Mensajes" ? <MessagesPanel {...panelProps} composeId={composeId} onComposeChange={setComposeId} />
-            : <SettingsPanel {...panelProps} services={services} onSaveSettings={saveSettings} onSaveProfile={saveProfile} />}
+            : <SettingsPanel {...panelProps} services={services} onSaveSettings={saveSettings} onSaveProfile={saveProfile} onSwitchAccount={switchAccount} canSwitchLocally={!isSupabaseConfigured} />}
         </div>
       </section>
 
       <nav className="mobile-nav" aria-label="Navegación principal">
         {nav.map(({ label, icon: Icon }) => {
-          const badge = label === "Inicio" ? myTicketCount : label === "Prospección" ? temporaryCount : 0;
+          const badge = badgeFor(label);
           return <button key={label} className={section === label ? "active" : ""} onClick={() => setSection(label)} aria-current={section === label ? "page" : undefined}><Icon size={19} />{badge > 0 && <b>{badge}</b>}<span>{label === "Configuración" ? "Ajustes" : label}</span></button>;
         })}
       </nav>
