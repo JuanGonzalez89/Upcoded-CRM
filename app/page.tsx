@@ -51,6 +51,7 @@ export default function Home() {
   const [now, setNow] = useState(Date.now());
   const [hydrated, setHydrated] = useState(false);
   const lastMutationAt = useRef(0);
+  const pendingMutations = useRef(0);
 
   const me = team.find((member) => member.email === meEmail) ?? team[0];
   const drawerLead = leads.find((lead) => lead.id === drawerId);
@@ -112,8 +113,9 @@ export default function Home() {
       const startedAt = Date.now();
       try {
         const [{ prospects }, { settings: shared }] = await Promise.all([api<{ prospects: Lead[] }>("/api/prospects"), api<{ settings: Settings }>("/api/settings")]);
-        // Si hubo un cambio propio mientras la recarga viajaba, esta respuesta puede ser vieja.
-        if (lastMutationAt.current > startedAt) return;
+        // Si hubo un cambio propio mientras la recarga viajaba (o todavía hay uno en vuelo),
+        // esta respuesta puede ser vieja: no debe pisar un cambio optimista recién hecho.
+        if (lastMutationAt.current > startedAt || pendingMutations.current > 0) return;
         setLeads(prospects);
         setSettings(shared);
       } catch { /* se reintenta en el próximo ciclo */ }
@@ -129,15 +131,38 @@ export default function Home() {
       if (message) setNotice(message);
       return true;
     }
+
+    // Optimista: todo salvo enviar un mensaje se aplica en pantalla al instante (arrastrar en el
+    // tablero, descartar...), antes de confirmar contra el servidor. Un mensaje ya tiene su propio
+    // indicador "Registrando…" y antedatar el envío rompía el redactor si la confirmación tardaba.
+    const instant = !patch.contact;
+    let previous: Lead | undefined;
+    let optimistic: Lead | undefined;
+    if (instant) {
+      setLeads((current) => current.map((lead) => {
+        if (lead.id !== id) return lead;
+        previous = lead;
+        try { optimistic = applyLocalPatch(lead, patch, meEmail, team, settings); } catch { optimistic = lead; }
+        return optimistic;
+      }));
+      if (message) setNotice(message);
+    }
+
+    pendingMutations.current += 1;
     try {
       lastMutationAt.current = Date.now();
       const { prospect } = await api<{ prospect: Lead }>(`/api/prospects/${id}`, { method: "PATCH", body: patch });
+      lastMutationAt.current = Date.now();
       setLeads((current) => current.map((lead) => lead.id === id ? prospect : lead));
-      if (message) setNotice(message);
+      if (!instant && message) setNotice(message);
       return true;
     } catch (error) {
+      // Sólo se revierte si nada más modificó este lead mientras la llamada estaba en vuelo.
+      if (instant) setLeads((current) => current.map((lead) => lead.id === id && lead === optimistic && previous ? previous : lead));
       setNotice(error instanceof Error ? error.message : "No se pudo actualizar el prospecto.");
       return false;
+    } finally {
+      pendingMutations.current -= 1;
     }
   }, [meEmail, team, settings]);
 

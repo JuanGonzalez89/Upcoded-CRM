@@ -15,7 +15,9 @@ export function ProspectDrawer({ lead, team, onUpdate, onCompose, onClose }: Pan
   const [notes, setNotes] = useState(lead.notes);
   const [note, setNote] = useState("");
 
-  useEffect(() => { setPhone(lead.phone); setEmail(lead.email); setNotes(lead.notes); }, [lead.id, lead.phone, lead.email, lead.notes]);
+  // Sólo al abrir una ficha distinta: si dependiera de phone/email/notes, un cambio de fondo del
+  // mismo lead (sync con el equipo, reintento fallido) pisaría lo que la persona está escribiendo.
+  useEffect(() => { setPhone(lead.phone); setEmail(lead.email); setNotes(lead.notes); }, [lead.id]);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
