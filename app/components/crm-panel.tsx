@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { formatDate, PIPELINE_STAGES, relativeDue, stageLabel, type Lead, type Stage } from "@/lib/crm";
 import { AssigneeSelect, StageBadge, type PanelProps } from "@/app/components/ui";
 import { KanbanBoard } from "@/app/components/kanban-board";
+import { usePersistentState } from "@/lib/use-persistent-state";
 
 type OwnerFilter = "mios" | "todos" | "sin_asignar" | string;
 
@@ -11,7 +12,7 @@ export function CrmPanel({ leads, team, me, now, onOpen, onUpdate }: PanelProps)
   const [stage, setStage] = useState<Stage | "activos" | "todas">("activos");
   const [province, setProvince] = useState("todas");
   const [query, setQuery] = useState("");
-  const [view, setView] = useState<"tabla" | "tablero">("tabla");
+  const [view, setView] = usePersistentState<"tabla" | "tablero">("upcoded-crm-view-pipeline", "tabla");
 
   const pipeline = useMemo(() => leads.filter((lead) => PIPELINE_STAGES.includes(lead.state)), [leads]);
   const byOwner = pipeline.filter((lead) => owner === "todos" ? true : owner === "mios" ? lead.assignedTo === me.email : owner === "sin_asignar" ? !lead.assignedTo : lead.assignedTo === owner);

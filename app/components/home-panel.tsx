@@ -2,6 +2,7 @@ import { ArrowRight, CircleOff, CalendarClock, Check, Clock3, Inbox, MessageSqua
 import { useMemo, useState } from "react";
 import { buildTickets, isTemporary, memberName, ticketLabel, type TicketKind } from "@/lib/crm";
 import { Avatar, type PanelProps, type Section } from "@/app/components/ui";
+import { usePersistentState } from "@/lib/use-persistent-state";
 
 const ticketIcon: Record<TicketKind, typeof Inbox> = {
   sin_respuesta: CircleOff,
@@ -11,7 +12,7 @@ const ticketIcon: Record<TicketKind, typeof Inbox> = {
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function HomePanel({ leads, team, me, now, onOpen, onUpdate, onCompose, onNavigate }: PanelProps & { onNavigate: (section: Section) => void }) {
-  const [scope, setScope] = useState<"mios" | "equipo">("mios");
+  const [scope, setScope] = usePersistentState<"mios" | "equipo">("upcoded-crm-view-home-scope", "mios");
   const [kind, setKind] = useState<TicketKind | "todos">("todos");
   const tickets = useMemo(() => buildTickets(leads, me.email, scope, now), [leads, me.email, scope, now]);
   const visible = kind === "todos" ? tickets : tickets.filter((ticket) => ticket.kind === kind);

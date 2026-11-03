@@ -2,12 +2,13 @@ import { AlertTriangle, AtSign, Check, Copy, ExternalLink, Instagram, MessageCir
 import { useEffect, useMemo, useState } from "react";
 import { channelLabel, formatDateTime, memberName, PIPELINE_STAGES, relativeDue, renderTemplate, whatsappLinks, type Channel, type Lead, type WhatsappLink } from "@/lib/crm";
 import { Avatar, StageBadge, type PanelProps } from "@/app/components/ui";
+import { usePersistentState } from "@/lib/use-persistent-state";
 
 const channelIcon: Record<Channel, typeof MessageCircle> = { whatsapp: MessageCircle, email: AtSign, instagram: Instagram };
 type Queue = "pendientes" | "primer" | "seguimiento";
 
 export function MessagesPanel({ leads, team, me, now, settings, onOpen, onUpdate, composeId, onComposeChange }: PanelProps & { composeId?: string; onComposeChange: (id?: string) => void }) {
-  const [queue, setQueue] = useState<Queue>("pendientes");
+  const [queue, setQueue] = usePersistentState<Queue>("upcoded-crm-view-messages-queue", "pendientes");
   const [channel, setChannel] = useState<Channel>("whatsapp");
   const [body, setBody] = useState("");
   const [historyOwner, setHistoryOwner] = useState<string>("todos");
