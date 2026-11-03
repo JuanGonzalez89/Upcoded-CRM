@@ -27,6 +27,10 @@ Abrí `http://localhost:3000`.
 
 Si ninguna fuente responde, la búsqueda se detiene: la app no fabrica negocios ni afirma que una empresa no tiene web. Cada resultado vence a las 24 horas si nadie lo guarda.
 
+## Análisis crítico de la web (a demanda)
+
+Desde la ficha de un prospecto, el botón "Analizar web" corre una auditoría más profunda que la de la búsqueda (por eso no es automática: tardaría demasiado para correrla sobre 15 negocios a la vez). Cada punto de mejora sale de algo verificable en el sitio: imágenes sin texto alternativo, sin favicon, sin encabezado principal, pie de página con un año viejo, sin `robots.txt`/`sitemap.xml`. Si configurás `GOOGLE_PAGESPEED_API_KEY` (gratis), se suma el propio diagnóstico de Google PageSpeed Insights, con números que el cliente puede verificar él mismo. Si no se puede confirmar algo, no aparece — nunca se inventa un hallazgo. El resultado queda guardado en el prospecto y alimenta automáticamente la observación del primer mensaje.
+
 ## Tests
 
 ```powershell

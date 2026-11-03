@@ -98,6 +98,37 @@ describe("mensajes", () => {
       assert.doesNotMatch(outreachObservation(lead({ signals: [signal] })), /\b(revisé|vi|noté|miré)\b/);
     }
   });
+
+  test("si ya se analizó la web a fondo, se prefieren esos hallazgos verificados sobre las señales genéricas", () => {
+    const withImprovements = lead({
+      signals: ["No se detectó etiqueta viewport para móvil"],
+      improvements: [{ title: "x", detail: "tiene 3 imágenes sin texto alternativo" }, { title: "y", detail: "no tiene sitemap.xml" }],
+    });
+    assert.equal(outreachObservation(withImprovements), "tiene 3 imágenes sin texto alternativo, y además no tiene sitemap.xml");
+  });
+
+  test("los hallazgos de Google PageSpeed no se citan tal cual en el mensaje (vienen en imperativo, no como cláusula)", () => {
+    const onlyGoogleFindings = lead({
+      signals: ["No se detectó etiqueta viewport para móvil"],
+      improvements: [{ title: "Reduce el tamaño de las imágenes", detail: "Reduce el tamaño de las imágenes (ahorro estimado: 0,8 s)", evidence: "Google PageSpeed Insights (mobile)" }],
+    });
+    assert.doesNotMatch(outreachObservation(onlyGoogleFindings), /Reduce el tamaño/);
+  });
+
+  test("entre hallazgos propios y de Google, el mensaje sólo cita los propios", () => {
+    const mixed = lead({
+      signals: [],
+      improvements: [
+        { title: "Rendimiento: 30/100 según Google", detail: "Google le mide 30/100 en rendimiento mobile", evidence: "Google PageSpeed Insights (mobile)" },
+        { title: "x", detail: "no tiene sitemap.xml" },
+      ],
+    });
+    assert.equal(outreachObservation(mixed), "no tiene sitemap.xml");
+  });
+
+  test("sin análisis a fondo, cae al patrón genérico de siempre", () => {
+    assert.match(outreachObservation(lead({ signals: ["No se detectó etiqueta viewport para móvil"] })), /no se adapta bien al celular/);
+  });
 });
 
 describe("whatsappLinks", () => {

@@ -109,6 +109,13 @@ button,input,select{font:inherit}button{cursor:pointer;border:0}.sidebar{backgro
 .link-list a,.evidence-list a{color:#62d8cb;font-size:11px;text-decoration:none;display:inline-flex;gap:5px;align-items:center}
 .link-list a:hover,.evidence-list a:hover{text-decoration:underline}
 .evidence-list{margin:0;padding-left:16px;display:grid;gap:4px;font-size:11px;color:#94a0b5}
+.section-heading{display:flex;gap:7px;align-items:center}
+.improvement-list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.improvement-list strong{font-size:12px;color:#dbe2ec}
+.improvement-list p{margin:2px 0 0;font-size:11px;color:#94a0b5;line-height:1.5}
+.improvement-list small{display:block;margin-top:2px;font-size:10px;color:#62d8cb}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin 1s linear infinite}
 .notes,.composer textarea,.settings-form textarea{width:100%;background:#0d131c;border:1px solid #263345;border-radius:7px;color:#edf1f8;padding:10px;font:12px/1.55 Manrope,Arial,sans-serif;resize:vertical}
 .timeline{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .timeline li{display:flex;gap:10px;align-items:flex-start;font-size:11px}

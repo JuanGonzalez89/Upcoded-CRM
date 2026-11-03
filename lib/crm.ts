@@ -33,6 +33,8 @@ export type Lead = {
   createdAt: string;
   activity: Activity[];
   messages: SentMessage[];
+  improvements?: { title: string; detail: string; evidence?: string }[];
+  analyzedAt?: string;
 };
 
 export type LeadPatch = {
@@ -125,6 +127,16 @@ const OUTREACH_OBSERVATIONS: [RegExp, string][] = [
 const FALLBACK_OBSERVATION = "hay margen para que las consultas les lleguen más fácil";
 
 export function outreachObservation(lead: Lead) {
+  // El análisis a demanda ("Analizar web" en la ficha) da hallazgos concretos y verificados;
+  // si existen, se prefieren sobre el patrón genérico que sólo mira las señales de la auditoría rápida.
+  // Los de Google PageSpeed (marcados con "evidence") traen el texto tal cual de Lighthouse, en
+  // imperativo ("Reduce el tamaño de las imágenes"): no encajan en la frase "noté que…", así que
+  // sólo se usan los redactados a mano como cláusula — esos siguen visibles igual en la ficha.
+  const citable = lead.improvements?.filter((item) => !item.evidence);
+  if (citable?.length) {
+    const [first, second] = citable;
+    return second ? `${first.detail}, y además ${second.detail}` : first.detail;
+  }
   return OUTREACH_OBSERVATIONS.find(([pattern]) => lead.signals.some((signal) => pattern.test(signal)))?.[1] ?? FALLBACK_OBSERVATION;
 }
 

@@ -42,7 +42,7 @@ export default function Home() {
   const [team, setTeam] = useState<TeamMember[]>(DEFAULT_TEAM);
   const [meEmail, setMeEmail] = useState(DEFAULT_TEAM[0].email);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
-  const [services, setServices] = useState<Services>({ supabase: isSupabaseConfigured, tavily: false });
+  const [services, setServices] = useState<Services>({ supabase: isSupabaseConfigured, tavily: false, pagespeed: false });
   const [drawerId, setDrawerId] = useState<string>();
   const [composeId, setComposeId] = useState<string>();
   const [sidebar, setSidebar] = useState(true);
@@ -166,6 +166,18 @@ export default function Home() {
     }
   }, [meEmail, team, settings]);
 
+  async function analyzeSite(id: string) {
+    try {
+      const { prospect } = await api<{ prospect: Lead }>(`/api/prospects/${id}/analyze`, { method: "POST" });
+      setLeads((current) => current.map((lead) => lead.id === id ? prospect : lead));
+      setNotice(`${prospect.name}: análisis actualizado con ${prospect.improvements?.length ?? 0} punto${prospect.improvements?.length === 1 ? "" : "s"} de mejora.`);
+      return true;
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "No se pudo analizar el sitio.");
+      return false;
+    }
+  }
+
   async function launchSearch(form: SearchForm) {
     setNotice("Consultando la fuente configurada y preparando evidencia verificable…");
     try {
@@ -216,7 +228,7 @@ export default function Home() {
     setSection("Mensajes");
   }
 
-  const panelProps = { leads, team, me, now, settings, onOpen: setDrawerId, onUpdate: updateLead, onCompose: compose };
+  const panelProps = { leads, team, me, now, settings, onOpen: setDrawerId, onUpdate: updateLead, onCompose: compose, onAnalyze: analyzeSite };
 
   return (
     <main className={sidebar ? "app-shell" : "app-shell compact"}>

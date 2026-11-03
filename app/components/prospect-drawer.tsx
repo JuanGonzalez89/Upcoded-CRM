@@ -1,4 +1,4 @@
-import { AtSign, CalendarClock, Check, Globe2, Instagram, Link2, MessageSquareText, Phone, StickyNote, X } from "lucide-react";
+import { AtSign, CalendarClock, Check, Globe2, Instagram, Link2, ListChecks, MessageSquareText, Phone, RefreshCw, StickyNote, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { channelLabel, formatDateTime, isTemporary, memberName, PIPELINE_STAGES, stageLabel, TEMPORARY_STAGES, type Channel, type Lead, type Stage } from "@/lib/crm";
 import { AssigneeSelect, Avatar, StageBadge, type PanelProps } from "@/app/components/ui";
@@ -9,11 +9,18 @@ function toDateInput(value?: string) {
   return value ? new Date(value).toISOString().slice(0, 10) : "";
 }
 
-export function ProspectDrawer({ lead, team, onUpdate, onCompose, onClose }: PanelProps & { lead: Lead; onClose: () => void }) {
+export function ProspectDrawer({ lead, team, onUpdate, onCompose, onAnalyze, onClose }: PanelProps & { lead: Lead; onClose: () => void }) {
   const [phone, setPhone] = useState(lead.phone);
   const [email, setEmail] = useState(lead.email);
   const [notes, setNotes] = useState(lead.notes);
   const [note, setNote] = useState("");
+  const [analyzing, setAnalyzing] = useState(false);
+
+  async function runAnalysis() {
+    setAnalyzing(true);
+    await onAnalyze(lead.id);
+    setAnalyzing(false);
+  }
 
   // Sólo al abrir una ficha distinta: si dependiera de phone/email/notes, un cambio de fondo del
   // mismo lead (sync con el equipo, reintento fallido) pisaría lo que la persona está escribiendo.
@@ -66,6 +73,17 @@ export function ProspectDrawer({ lead, team, onUpdate, onCompose, onClose }: Pan
             <div className="score-split"><div><span>Oportunidad</span><strong>{lead.score}</strong><small>/ 100</small></div><div><span>Confianza</span><strong>{lead.confidence}%</strong><small>{lead.site}</small></div></div>
             <div className="evidence">{lead.signals.map((signal) => <p key={signal}><Check size={15} /> {signal}</p>)}</div>
             {lead.evidence.length > 0 && <ul className="evidence-list">{lead.evidence.map((item, index) => <li key={index}>{item.url ? <a href={item.url} target="_blank" rel="noreferrer">{item.label}</a> : item.label}</li>)}</ul>}
+          </section>
+
+          <section className="drawer-section">
+            <h3 className="section-heading"><ListChecks size={16} /> Oportunidades de mejora</h3>
+            {lead.analyzedAt ? <>
+              {lead.improvements?.length ? <ul className="improvement-list">{lead.improvements.map((item, index) => <li key={index}><strong>{item.title}</strong><p>{item.detail}</p>{item.evidence && <small>{item.evidence}</small>}</li>)}</ul>
+                : <p className="cell-muted">El análisis no encontró ningún punto de mejora verificable: pasó todos los chequeos.</p>}
+              <small className="expiry">Analizado el {formatDateTime(lead.analyzedAt)}.</small>
+            </> : lead.websiteUrl ? <p className="cell-muted">Todavía no se analizó la web a fondo. El resultado se arma sólo con hallazgos verificables: si no hay nada confirmado, no va a aparecer nada inventado.</p>
+              : <p className="cell-muted">Este prospecto no tiene sitio web cargado: no hay nada para analizar.</p>}
+            {lead.websiteUrl && <button className="secondary-button" onClick={runAnalysis} disabled={analyzing}><RefreshCw size={15} className={analyzing ? "spin" : ""} /> {analyzing ? "Analizando…" : lead.analyzedAt ? "Volver a analizar" : "Analizar web"}</button>}
           </section>
 
           <section className="drawer-section">

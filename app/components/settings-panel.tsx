@@ -1,9 +1,9 @@
-import { CheckCircle2, CircleAlert, Database, Download, LogOut, Radar, RotateCcw, Save, UserRoundCog, Users } from "lucide-react";
+import { CheckCircle2, CircleAlert, Database, Download, ListChecks, LogOut, Radar, RotateCcw, Save, UserRoundCog, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { channelLabel, DEFAULT_SETTINGS, isTemporary, type Settings, type Templates } from "@/lib/crm";
 import { Avatar, type PanelProps } from "@/app/components/ui";
 
-export type Services = { supabase: boolean; tavily: boolean };
+export type Services = { supabase: boolean; tavily: boolean; pagespeed: boolean };
 
 const templateLabel: Record<keyof Templates, string> = { ...channelLabel, seguimiento: "Seguimiento (sin respuesta)" };
 
@@ -77,6 +77,7 @@ export function SettingsPanel({ leads, team, me, settings, services, onSaveSetti
         <div className="operation-list">
           <article><Database size={19} /><div><strong>Supabase</strong><span>Acceso con Google + base compartida del equipo</span></div><ServiceState ok={services.supabase} /></article>
           <article><Radar size={19} /><div><strong>Tavily</strong><span>Búsqueda de prospectos · TAVILY_API_KEY</span></div><ServiceState ok={services.tavily} /></article>
+          <article><ListChecks size={19} /><div><strong>Google PageSpeed</strong><span>Análisis de web más rico · GOOGLE_PAGESPEED_API_KEY (opcional)</span></div><ServiceState ok={services.pagespeed} /></article>
         </div>
       </section>
 

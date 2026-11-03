@@ -11,6 +11,7 @@ export type PanelProps = {
   onOpen: (id: string) => void;
   onUpdate: (id: string, patch: LeadPatch, message?: string) => Promise<boolean>;
   onCompose: (id: string) => void;
+  onAnalyze: (id: string) => Promise<boolean>;
 };
 
 export function Avatar({ member, size = "md" }: { member?: TeamMember; size?: "sm" | "md" }) {

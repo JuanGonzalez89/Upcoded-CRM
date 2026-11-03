@@ -17,7 +17,7 @@ export const PROSPECT_SELECT = "*, prospect_activity(id, kind, body, actor_email
 const byNewest = (a: { at: string }, b: { at: string }) => b.at.localeCompare(a.at);
 
 export function mapProspect(row: DbProspect): Lead {
-  const audit = (row.audit && typeof row.audit === "object" ? row.audit : {}) as { signals?: string[]; webStatus?: WebStatus };
+  const audit = (row.audit && typeof row.audit === "object" ? row.audit : {}) as { signals?: string[]; webStatus?: WebStatus; improvements?: Lead["improvements"]; analyzedAt?: string };
   const evidence = Array.isArray(row.source_evidence) ? row.source_evidence as { label: string; url?: string }[] : [];
   return {
     id: row.id,
@@ -46,5 +46,7 @@ export function mapProspect(row: DbProspect): Lead {
     createdAt: row.created_at,
     activity: (row.prospect_activity ?? []).map((item) => ({ id: item.id, kind: item.kind, body: item.body, actor: item.actor_email, at: item.created_at })).sort(byNewest),
     messages: (row.prospect_messages ?? []).map((item) => ({ id: item.id, channel: item.channel, body: item.body, actor: item.actor_email ?? "", at: item.created_at })).sort(byNewest),
+    improvements: audit.improvements,
+    analyzedAt: audit.analyzedAt,
   };
 }

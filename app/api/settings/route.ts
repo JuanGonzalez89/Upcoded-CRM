@@ -3,7 +3,7 @@ import { DEFAULT_SETTINGS, type Settings } from "@/lib/crm";
 import { requireTeamMember } from "@/lib/server-auth";
 
 function services() {
-  return { supabase: true, tavily: Boolean(process.env.TAVILY_API_KEY) };
+  return { supabase: true, tavily: Boolean(process.env.TAVILY_API_KEY), pagespeed: Boolean(process.env.GOOGLE_PAGESPEED_API_KEY) };
 }
 
 export async function GET(request: Request) {
