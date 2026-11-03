@@ -15,6 +15,20 @@ describe("isEditorialOrDirectory", () => {
     assert.ok(!isEditorialOrDirectory("KEK pastelería & co.", "https://www.instagram.com/kekpasteleria"));
     assert.ok(!isEditorialOrDirectory("Estudio Jurídico Pérez", "https://estudioperez.com.ar"));
   });
+
+  test("descarta notas con título genérico pero URL de listado (portales tipo Timeout)", () => {
+    assert.ok(isEditorialOrDirectory("comer y beber", "https://www.timeout.com/es/buenos-aires/comer-y-beber"));
+    assert.ok(isEditorialOrDirectory("cafe de especialidad", "https://www.timeout.com/es/buenos-aires/mejores-cafeterias-de-especialidad"));
+    assert.ok(isEditorialOrDirectory("Atracciones turísticas con los mejores cafés de Buenos Aires", "https://all.accor.com/a/es/limitless/thematics/shopping/mejores-cafes-buenos-aires.html"));
+  });
+
+  test("descarta la bio de quien escribió la nota, no es un negocio", () => {
+    assert.ok(isEditorialOrDirectory("sol mohadeb", "https://www.timeout.com/profile/sol-mohadeb"));
+  });
+
+  test("detecta el listado por el slug de la URL aunque el título no tenga palabras clave", () => {
+    assert.ok(isEditorialOrDirectory("cafeteria con niños", "https://misitio.com/notas/mejores-cafes-de-especialidad-para-ir-con-chicos"));
+  });
 });
 
 describe("identityKeys", () => {

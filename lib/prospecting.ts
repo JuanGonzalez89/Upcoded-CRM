@@ -69,12 +69,20 @@ export function isLikelyDuplicate(a: { name: string; location: string }, b: { na
   return normalize(a.name) === normalize(b.name) && normalize(a.location) === normalize(b.location);
 }
 
-const EDITORIAL_HOSTS = /(tripadvisor|yelp|paginasamarillas|guiaoleo|doctoralia|cylex|foursquare|infobae|clarin|lanacion|pagina12|perfil|cronista|tn\.com|minutouno|wikipedia|mercadolibre|zonaprop|argenprop|properati|booking|despegar|youtube|tiktok|pinterest|medium|blogspot|wordpress\.com|reddit|quora|linkedin\.com\/pulse|facebook\.com\/groups)\./i;
+const EDITORIAL_HOSTS = /(tripadvisor|yelp|paginasamarillas|guiaoleo|doctoralia|cylex|foursquare|infobae|clarin|lanacion|pagina12|perfil|cronista|tn\.com|minutouno|wikipedia|mercadolibre|zonaprop|argenprop|properati|booking|despegar|youtube|tiktok|pinterest|medium|blogspot|wordpress\.com|reddit|quora|linkedin\.com\/pulse|facebook\.com\/groups|timeout|accor|feca\.app|bairessecreta|welcomeargentina)\./i;
 const EDITORIAL_TITLE = /(^#|\btop\s?\d+|\blos \d+|\blas \d+|\b\d+ (mejores|lugares|opciones|recomendad)|\bmejores\b|\branking\b|\bguía\b|\blistado\b|\bdirectorio\b|\bdónde (comer|ir)\b|\bopiniones de\b)/i;
+// Notas de este tipo suelen tener un título genérico ("comer y beber") pero la URL delata
+// el listado real ("/mejores-cafeterias-de-especialidad"), o es la bio de quien escribió la nota.
+const EDITORIAL_PATH = /\/(blog|revista|magazine|noticias?|notas?|articulos?|guias?|rankings?|profile|perfil|autor|author|contributor|redaccion)(\/|$)/i;
 
 /** Descarta notas, rankings, directorios y portales: no son el negocio sino una página sobre varios. */
 export function isEditorialOrDirectory(title: string, url: string) {
-  return EDITORIAL_TITLE.test(title) || EDITORIAL_HOSTS.test(url);
+  let path = url;
+  try { path = new URL(url).pathname; } catch { /* URL relativa o inválida: se evalúa tal cual */ }
+  let slug = path;
+  try { slug = decodeURIComponent(path); } catch { /* secuencia % inválida: se evalúa sin decodificar */ }
+  slug = slug.replace(/[-_/]+/g, " ");
+  return EDITORIAL_TITLE.test(title) || EDITORIAL_TITLE.test(slug) || EDITORIAL_PATH.test(path) || EDITORIAL_HOSTS.test(url);
 }
 
 /** Claves para reconocer el mismo negocio entre búsquedas: nombre normalizado, dominio y teléfono. */
